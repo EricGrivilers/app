@@ -1,0 +1,5 @@
+services:
+    caravane.cms.twig.node_extension:
+        class: Caravane\Bundle\CmsBundle\Twig\NodeExtension
+        tags:
+            - { name: twig.extension }

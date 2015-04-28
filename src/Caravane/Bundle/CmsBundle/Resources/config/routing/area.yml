@@ -1,0 +1,30 @@
+admin_cms_area:
+    path:     /
+    defaults: { _controller: "CaravaneCmsBundle:Area:index" }
+
+admin_cms_area_show:
+    path:     /{id}/show
+    defaults: { _controller: "CaravaneCmsBundle:Area:show" }
+
+admin_cms_area_new:
+    path:     /new
+    defaults: { _controller: "CaravaneCmsBundle:Area:new" }
+
+admin_cms_area_create:
+    path:     /create
+    defaults: { _controller: "CaravaneCmsBundle:Area:create" }
+    methods:  POST
+
+admin_cms_area_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CaravaneCmsBundle:Area:edit" }
+
+admin_cms_area_update:
+    path:     /{id}/update
+    defaults: { _controller: "CaravaneCmsBundle:Area:update" }
+    methods:  [POST, PUT]
+
+admin_cms_area_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CaravaneCmsBundle:Area:delete" }
+    methods:  [POST, DELETE]

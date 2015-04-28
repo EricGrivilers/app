@@ -1,0 +1,15 @@
+caravane_cms_admin_cms_node:
+    resource: "@CaravaneCmsBundle/Resources/config/routing/node.yml"
+    prefix:   /admin/cms/node
+
+caravane_cms_admin_cms_area:
+    resource: "@CaravaneCmsBundle/Resources/config/routing/area.yml"
+    prefix:   /admin/cms/area
+
+caravane_cms_admin_cms_page:
+    resource: "@CaravaneCmsBundle/Resources/config/routing/page.yml"
+    prefix:   /admin/cms/page
+
+caravane_cms_homepage:
+    path:     /
+    defaults: { _controller: CaravaneCmsBundle:Default:index }

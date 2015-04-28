@@ -1,0 +1,102 @@
+<?php
+
+namespace Caravane\Bundle\CmsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+use Caravane\Bundle\UserBundle\Entity\User;
+
+/**
+ * Node
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Caravane\Bundle\CmsBundle\Entity\NodeRepository")
+ */
+class Node
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="attributes", type="text")
+     */
+    private $attributes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="public", type="string", length=255)
+     */
+    private $public;
+
+
+    /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated;
+
+
+    /**
+     * @var string $createdBy
+     *
+     * @Gedmo\Blameable(on="create")
+     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
+     */
+    private $createdBy;
+
+    /**
+     * @var string $updatedBy
+     *
+     * @Gedmo\Blameable(on="update")
+     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
+     */
+    private $updatedBy;
+
+    /**
+     * @var datetime $contentChangedBy
+     *
+     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
+     * @Gedmo\Timestampable(on="change", field={"content", "attributes"})
+     */
+    private $contentChangedBy;
+
+
+
+}
