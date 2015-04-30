@@ -1,6 +1,6 @@
 <?php
 
-namespace Caravane\ShopBundle\Controller;
+namespace Caravane\Bundle\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

@@ -88,16 +88,6 @@ class Node
      */
     private $updatedBy;
 
-    /**
-     * @var datetime $contentChangedBy
-     *
-     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
-     * @Gedmo\Timestampable(on="change", field={"content", "attributes"})
-     */
-    private $contentChangedBy;
-
-
 
 
     /**
@@ -292,28 +282,5 @@ class Node
     public function getUpdatedBy()
     {
         return $this->updatedBy;
-    }
-
-    /**
-     * Set contentChangedBy
-     *
-     * @param \Caravane\Bundle\UserBundle\Entity\User $contentChangedBy
-     * @return Node
-     */
-    public function setContentChangedBy(\Caravane\Bundle\UserBundle\Entity\User $contentChangedBy = null)
-    {
-        $this->contentChangedBy = $contentChangedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get contentChangedBy
-     *
-     * @return \Caravane\Bundle\UserBundle\Entity\User 
-     */
-    public function getContentChangedBy()
-    {
-        return $this->contentChangedBy;
     }
 }

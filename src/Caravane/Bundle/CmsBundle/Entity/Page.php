@@ -137,15 +137,6 @@ class Page
      */
     private $updatedBy;
 
-    /**
-     * @var datetime $contentChangedBy
-     *
-     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
-     * @Gedmo\Timestampable(on="change", field={"title", "children", "template"})
-     */
-    private $contentChangedBy;
-
 
     /**
      * Constructor
@@ -154,6 +145,7 @@ class Page
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -533,26 +525,7 @@ class Page
         return $this->updatedBy;
     }
 
-    /**
-     * Set contentChangedBy
-     *
-     * @param \Caravane\Bundle\UserBundle\Entity\User $contentChangedBy
-     * @return Page
-     */
-    public function setContentChangedBy(\Caravane\Bundle\UserBundle\Entity\User $contentChangedBy = null)
-    {
-        $this->contentChangedBy = $contentChangedBy;
+    
 
-        return $this;
-    }
 
-    /**
-     * Get contentChangedBy
-     *
-     * @return \Caravane\Bundle\UserBundle\Entity\User 
-     */
-    public function getContentChangedBy()
-    {
-        return $this->contentChangedBy;
-    }
 }

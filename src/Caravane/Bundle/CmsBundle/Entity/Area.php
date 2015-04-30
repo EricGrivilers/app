@@ -13,7 +13,7 @@ use Caravane\Bundle\UserBundle\Entity\User;
  * Area
  *
  * @ORM\Table()
- *  @Gedmo\Tree(type="nested")
+ * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="Caravane\Bundle\CmsBundle\Entity\AreaRepository")
  */
 class Area
@@ -130,19 +130,11 @@ class Area
      * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
      */
     private $updatedBy;
-
-    /**
-     * @var datetime $contentChangedBy
-     *
-     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
-     * @Gedmo\Timestampable(on="change", field={"template", "node", "children"})
-     */
-    private $contentChangedBy;
     
 
 
 
+    
     /**
      * Constructor
      */
@@ -502,28 +494,5 @@ class Area
     public function getUpdatedBy()
     {
         return $this->updatedBy;
-    }
-
-    /**
-     * Set contentChangedBy
-     *
-     * @param \Caravane\Bundle\UserBundle\Entity\User $contentChangedBy
-     * @return Area
-     */
-    public function setContentChangedBy(\Caravane\Bundle\UserBundle\Entity\User $contentChangedBy = null)
-    {
-        $this->contentChangedBy = $contentChangedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get contentChangedBy
-     *
-     * @return \Caravane\Bundle\UserBundle\Entity\User 
-     */
-    public function getContentChangedBy()
-    {
-        return $this->contentChangedBy;
     }
 }
