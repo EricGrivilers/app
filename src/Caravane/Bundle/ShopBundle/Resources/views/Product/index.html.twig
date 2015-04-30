@@ -1,0 +1,65 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Product list</h1>
+
+    <table class="records_list table table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Sku</th>
+                <th>Reference</th>
+                <th>Provider</th>
+                <th>Price</th>
+                <th>Attributes</th>
+                <th>Description</th>
+                <th>Meta_description</th>
+                <th>Meta_keywords</th>
+                <th>Insertdate</th>
+                <th>Updatedate</th>
+                <th>Active</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_shop_product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.sku }}</td>
+                <td>{{ entity.reference }}</td>
+                <td>{{ entity.provider }}</td>
+                <td>{{ entity.price }}</td>
+                <td>{{ entity.attributes }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.metadescription }}</td>
+                <td>{{ entity.metakeywords }}</td>
+                <td>{% if entity.insertDate %}{{ entity.insertDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updateDate %}{{ entity.updateDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.active }}</td>
+                <td>{{ entity.stock }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_shop_product_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_shop_product_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_shop_product_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -2032,6 +2032,10 @@ var components = {
             "main": "jquery-built.js"
         },
         {
+            "name": "moment",
+            "main": "moment-built.js"
+        },
+        {
             "name": "jstree",
             "main": "jstree-built.js"
         }

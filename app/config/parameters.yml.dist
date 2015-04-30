@@ -18,3 +18,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    node_bin: /usr/bin/node
+    node_modules: /usr/local/lib/node_modules
+
+    shop_mail_sender_email: me@myshop.com
+    shop_name: "My Shop"
+    shop_baseline: "Découvreur de vins"

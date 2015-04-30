@@ -18,10 +18,14 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
             new AppBundle\AppBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
+            new Caravane\Bundle\ShopBundle\CaravaneShopBundle(),
             new Caravane\Bundle\UserBundle\CaravaneUserBundle(),
         );
 

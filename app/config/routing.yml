@@ -1,9 +1,16 @@
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
 caravane_cms:
     resource: "@CaravaneCmsBundle/Resources/config/routing.yml"
     prefix:   /
+
+caravane_shop:
+    resource: "@CaravaneShopBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 app:
     resource: "@AppBundle/Controller/"

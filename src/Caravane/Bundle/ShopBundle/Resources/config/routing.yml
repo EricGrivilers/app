@@ -1,0 +1,11 @@
+caravane_shop_admin_shop_product:
+    resource: "@CaravaneShopBundle/Resources/config/routing/product.yml"
+    prefix:   /admin/shop/product
+
+caravane_shop_admin_category:
+    resource: "@CaravaneShopBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/shop/category
+
+caravane_shop_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CaravaneShopBundle:Default:index }

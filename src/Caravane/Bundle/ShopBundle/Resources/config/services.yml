@@ -1,0 +1,4 @@
+services:
+    caravane_shop.product_manager:
+        class: Caravane\ShopBundle\Manager\ProductManager
+        arguments: [@doctrine.orm.entity_manager]

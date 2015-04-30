@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dbc695401a4d4ff5660edb44bdcd1417",
+    "hash": "02f35eac29978b3277a0fe216a0992b1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1198,12 +1198,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/enyo/dropzone.git",
-                "reference": "b82c4797c9237aa5827f4fa97cd8d785ce16acce"
+                "reference": "7ca4dc49a79a360763d6002a83e5968109b33cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/enyo/dropzone/zipball/b82c4797c9237aa5827f4fa97cd8d785ce16acce",
-                "reference": "b82c4797c9237aa5827f4fa97cd8d785ce16acce",
+                "url": "https://api.github.com/repos/enyo/dropzone/zipball/7ca4dc49a79a360763d6002a83e5968109b33cd5",
+                "reference": "7ca4dc49a79a360763d6002a83e5968109b33cd5",
                 "shasum": ""
             },
             "type": "library",
@@ -1226,7 +1226,7 @@
                 "file upload",
                 "upload"
             ],
-            "time": "2015-02-09 15:09:05"
+            "time": "2015-04-28 14:19:53"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -1292,12 +1292,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "192c53916942847aee687722af54f431aead0b70"
+                "reference": "666afc973daac7bad8478a47d94d10178358b0ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/192c53916942847aee687722af54f431aead0b70",
-                "reference": "192c53916942847aee687722af54f431aead0b70",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/666afc973daac7bad8478a47d94d10178358b0ae",
+                "reference": "666afc973daac7bad8478a47d94d10178358b0ae",
                 "shasum": ""
             },
             "require": {
@@ -1351,7 +1351,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-04-16 23:14:14"
+            "time": "2015-04-30 13:32:37"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1430,6 +1430,41 @@
                 "uploadable"
             ],
             "time": "2015-02-24 21:41:37"
+        },
+        {
+            "name": "geedmo/yamm3",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/geedmo/yamm3.git",
+                "reference": "5aa11451340187cce1bc195a4437937b19535508"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/geedmo/yamm3/zipball/5aa11451340187cce1bc195a4437937b19535508",
+                "reference": "5aa11451340187cce1bc195a4437937b19535508",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "German Morales",
+                    "email": "geedmo.ds@gmail.com",
+                    "homepage": "http://geedmo.com"
+                }
+            ],
+            "description": "Yet another megamenu for Bootstrap 3.x",
+            "homepage": "http://geedmo.github.io/yamm3/",
+            "keywords": [
+                "bootstrap",
+                "megadropdown",
+                "megamenu"
+            ],
+            "time": "2015-04-04 12:59:29"
         },
         {
             "name": "imagine/imagine",
@@ -1855,6 +1890,60 @@
                 "imagine"
             ],
             "time": "2015-04-24 13:41:22"
+        },
+        {
+            "name": "moment/moment",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moment/moment.git",
+                "reference": "ce233cecf3d07aa15869a1db0fd8a8c43efccfcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moment/moment/zipball/ce233cecf3d07aa15869a1db0fd8a8c43efccfcd",
+                "reference": "ce233cecf3d07aa15869a1db0fd8a8c43efccfcd",
+                "shasum": ""
+            },
+            "require": {
+                "robloach/component-installer": "*"
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "moment.js"
+                    ],
+                    "files": [
+                        "min/*.js",
+                        "locale/*.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Wood",
+                    "email": "washwithcare@gmail.com"
+                }
+            ],
+            "description": "Parse, validate, manipulate, and display dates in JavaScript.",
+            "homepage": "http://github.com/moment/moment/",
+            "keywords": [
+                "date",
+                "ender",
+                "format",
+                "i18n",
+                "l10n",
+                "moment",
+                "parse",
+                "time",
+                "validate"
+            ],
+            "time": "2015-04-09 06:31:25"
         },
         {
             "name": "monolog/monolog",
@@ -2796,12 +2885,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vakata/jstree.git",
-                "reference": "a119c6f89ea99c97d30da6190c402e3fcaf69830"
+                "reference": "9178476030b7231248d8313ec36da91037062f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vakata/jstree/zipball/a119c6f89ea99c97d30da6190c402e3fcaf69830",
-                "reference": "a119c6f89ea99c97d30da6190c402e3fcaf69830",
+                "url": "https://api.github.com/repos/vakata/jstree/zipball/9178476030b7231248d8313ec36da91037062f8f",
+                "reference": "9178476030b7231248d8313ec36da91037062f8f",
                 "shasum": ""
             },
             "require": {
@@ -2843,7 +2932,7 @@
             ],
             "description": "jsTree is jquery plugin, that provides interactive trees.",
             "homepage": "http://jstree.com",
-            "time": "2015-04-28 07:12:33"
+            "time": "2015-04-30 11:53:02"
         },
         {
             "name": "voidberg/html5sortable",
@@ -2854,7 +2943,7 @@
                 "reference": "origin/master"
             },
             "type": "library",
-            "time": "2015-04-28 07:07:11"
+            "time": "2015-04-30 16:20:01"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -2957,7 +3046,9 @@
         "twitter/typeahead.js": 20,
         "enyo/dropzone": 20,
         "voidberg/html5sortable": 20,
-        "vakata/jstree": 20
+        "vakata/jstree": 20,
+        "moment/moment": 20,
+        "geedmo/yamm3": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
