@@ -144,9 +144,9 @@ liip_imagine:
     filter_sets:
         cache: ~
         my_thumb:
-            quality: 75
+            quality: 100
             filters:
-                thumbnail: { size: [120, 90], mode: outbound }
+                thumbnail: { size: [210, 210], mode: outbound }
 
 fos_user:
     db_driver: orm # other valid values are 'orm',mongodb', 'couchdb' and 'propel'

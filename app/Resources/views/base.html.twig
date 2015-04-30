@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>{{  app_name }}</title>
 
     {% block stylesheets %}
         {% include "stylesheets.required.html.twig" %}
@@ -52,7 +52,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">{{ app_name }}</a>
+            <a class="navbar-brand" href="#page-top"><img src="{{ asset('/img/logo.png') }}" alt="{{ app_name }}" /></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -82,23 +82,23 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive" src="img/profile.png" alt="">
+                <img class="img-responsive" src="{{ asset('/img/logo_b_t.png') | imagine_filter('my_thumb') }}" alt="{{ app_name }}" >
                 <div class="intro-text">
-                    <span class="name">Start Bootstrap</span>
-                    <hr class="star-light">
-                    <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    {#<span class="name">Start Bootstrap</span>
+                    <hr class="star-light">#}
+                    <span class="skills">Web & App Development</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<section id="body">
+{#<section id="body">
     <div class="container">
         {% block body %}{% endblock body %}
     </div>
 </section>
-
+#}
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
     <div class="container">
@@ -203,7 +203,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Contact Me</h2>
+                <h2>Contact</h2>
                 <hr class="star-primary">
             </div>
         </div>
@@ -260,26 +260,26 @@
             <div class="row">
                 <div class="footer-col col-md-4">
                     <h3>Location</h3>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                    <p>45 avenue Jules Malou<br>1040 Brussels, Belgium</p>
                 </div>
                 <div class="footer-col col-md-4">
                     <h3>Around the Web</h3>
                     <ul class="list-inline">
                         <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            <a href="https://www.facebook.com/pages/Caravane-Media/145783707801" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            <a href="https://plus.google.com/102838444074575072790/about" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            <a href="https://twitter.com/caravanemedia" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/company/caravane-media" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
                         </li>
-                        <li>
+                        {#<li>
                             <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                        </li>
+                        </li>#}
                     </ul>
                 </div>
                 <div class="footer-col col-md-4">
@@ -293,7 +293,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Your Website 2014
+                    Copyright &copy; {{ app_name }} {{ "now"|date('Y') }}
                 </div>
             </div>
         </div>
