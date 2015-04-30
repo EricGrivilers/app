@@ -11,7 +11,14 @@
 
     <title>Freelancer - Start Bootstrap Theme</title>
 
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    {% block stylesheets %}
+        {% include "stylesheets.required.html.twig" %}
+        {% include "stylesheets.app.html.twig" %}
+    {% endblock stylesheets %}
+    {% if app.user %}
+        {% include "stylesheets.user.html.twig" %}
+    {% endif %}
+    {#<!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -28,6 +35,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    #}
 
 </head>
 
@@ -44,7 +52,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="#page-top">{{ app_name }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -84,6 +92,12 @@
         </div>
     </div>
 </header>
+
+<section id="body">
+    <div class="container">
+        {% block body %}{% endblock body %}
+    </div>
+</section>
 
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
@@ -516,14 +530,14 @@
         </div>
     </div>
 </div>
+{% block javascripts %}
+    {% include "javascripts.app.html.twig" %}
+    {% if app.user %}
+        {% include "javascripts.user.html.twig" %}
+    {% endif %}
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Plugin JavaScript -->
+{% endblock javascripts %}
+{#<!-- Plugin JavaScript -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script src="js/classie.js"></script>
 <script src="js/cbpAnimatedHeader.js"></script>
@@ -534,7 +548,7 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/freelancer.js"></script>
-
+#}
 </body>
 
 </html>
