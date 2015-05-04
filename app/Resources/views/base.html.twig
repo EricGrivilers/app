@@ -62,7 +62,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">Portfolio</a>
+                    <a href="#References">References</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#about">About</a>
@@ -99,76 +99,114 @@
     </div>
 </section>
 #}
-<!-- Portfolio Grid Section -->
-<section id="portfolio">
+<!-- References Grid Section -->
+<section id="References">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Portfolio</h2>
+                <h2>References</h2>
                 <hr class="star-primary">
             </div>
         </div>
+        {%  set clients =[
+        "Alfa-Romeo-Logo.jpg",
+        "Anderlecht.gif",
+        "Awex.jpg",
+        "BAK2.jpg",
+        "Brabant_wallon.jpg",
+        "CRIOC.jpg",
+        "Chrysler.png",
+        "ETNO.jpg",
+        "hyundai.jpg",
+        "IMMO_LION.JPG",
+        "Iles_de_paix.jpg",
+        "MONTEA.jpg",
+        "Microsoft.png",
+        "ORGANIC.jpg",
+        "Peugeot.png",
+        "Promethea.jpg",
+        "RTBF.png",
+        "Radisson.png",
+        "Renault.jpg",
+        "SWIFT.jpg",
+        "Toyota.jpg",
+        "ULB.jpg",
+        "UNILEVER.jpg",
+        "VODAFONE.jpg"]
+        %}
         <div class="row">
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+            {%  for client in clients  %}
+                <div class="col-sm-2 References-item">
+                    {#<a href="#ReferencesModal{{ loop.index }}" class="References-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>#}
+                        <img src="{{ asset('img/clients/'~client) | imagine_filter('client') }}" class="img-responsive" alt="" />
+                    {#</a>#}
+                </div>
+            {%  endfor  %}
+            {#<div class="col-sm-4 References-item">
+                <a href="#ReferencesModal1" class="References-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
+                    <img src="img/References/cabin.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+            <div class="col-sm-4 References-item">
+                <a href="#ReferencesModal2" class="References-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/cake.png" class="img-responsive" alt="">
+                    <img src="img/References/cake.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+            <div class="col-sm-4 References-item">
+                <a href="#ReferencesModal3" class="References-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/circus.png" class="img-responsive" alt="">
+                    <img src="img/References/circus.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+            <div class="col-sm-4 References-item">
+                <a href="#ReferencesModal4" class="References-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/game.png" class="img-responsive" alt="">
+                    <img src="img/References/game.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+            <div class="col-sm-4 References-item">
+                <a href="#ReferencesModal5" class="References-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/safe.png" class="img-responsive" alt="">
+                    <img src="img/References/safe.png" class="img-responsive" alt="">
                 </a>
             </div>
-            <div class="col-sm-4 portfolio-item">
-                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+            <div class="col-sm-4 References-item">
+                <a href="#ReferencesModal6" class="References-link" data-toggle="modal">
                     <div class="caption">
                         <div class="caption-content">
                             <i class="fa fa-search-plus fa-3x"></i>
                         </div>
                     </div>
-                    <img src="img/portfolio/submarine.png" class="img-responsive" alt="">
+                    <img src="img/References/submarine.png" class="img-responsive" alt="">
                 </a>
-            </div>
+            </div>#}
         </div>
     </div>
 </section>
@@ -189,11 +227,7 @@
             <div class="col-lg-4">
                 <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
             </div>
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <a href="#" class="btn btn-lg btn-outline">
-                    <i class="fa fa-download"></i> Download Theme
-                </a>
-            </div>
+
         </div>
     </div>
 </section>
@@ -244,7 +278,7 @@
                     <div id="success"></div>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <button type="submit" class="btn btn-success btn-lg">Send</button>
+                            <button type="submit" class="btn ">Send</button>
                         </div>
                     </div>
                 </form>
@@ -259,11 +293,12 @@
         <div class="container">
             <div class="row">
                 <div class="footer-col col-md-4">
-                    <h3>Location</h3>
+                    {#<h3>Location</h3>#}
                     <p>45 avenue Jules Malou<br>1040 Brussels, Belgium</p>
+                    <p>+32 (0) 2 544 03 82</p>
                 </div>
-                <div class="footer-col col-md-4">
-                    <h3>Around the Web</h3>
+                <div class="footer-col col-md-offset-4 col-md-4">
+                    {#<h3>Around the Web</h3>#}
                     <ul class="list-inline">
                         <li>
                             <a href="https://www.facebook.com/pages/Caravane-Media/145783707801" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
@@ -282,10 +317,10 @@
                         </li>#}
                     </ul>
                 </div>
-                <div class="footer-col col-md-4">
+                {#<div class="footer-col col-md-4">
                     <h3>About Freelancer</h3>
                     <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
-                </div>
+                </div>#}
             </div>
         </div>
     </div>
@@ -307,8 +342,8 @@
     </a>
 </div>
 
-<!-- Portfolio Modals -->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- References Modals -->
+<div class="References-modal modal fade" id="ReferencesModal1" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -322,7 +357,7 @@
                     <div class="modal-body">
                         <h2>Project Title</h2>
                         <hr class="star-primary">
-                        <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                        <img src="img/References/cabin.png" class="img-responsive img-centered" alt="">
                         <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                         <ul class="list-inline item-details">
                             <li>Client:
@@ -345,7 +380,7 @@
         </div>
     </div>
 </div>
-<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="References-modal modal fade" id="ReferencesModal2" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -359,7 +394,7 @@
                     <div class="modal-body">
                         <h2>Project Title</h2>
                         <hr class="star-primary">
-                        <img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
+                        <img src="img/References/cake.png" class="img-responsive img-centered" alt="">
                         <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                         <ul class="list-inline item-details">
                             <li>Client:
@@ -382,7 +417,7 @@
         </div>
     </div>
 </div>
-<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="References-modal modal fade" id="ReferencesModal3" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -396,7 +431,7 @@
                     <div class="modal-body">
                         <h2>Project Title</h2>
                         <hr class="star-primary">
-                        <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
+                        <img src="img/References/circus.png" class="img-responsive img-centered" alt="">
                         <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                         <ul class="list-inline item-details">
                             <li>Client:
@@ -419,7 +454,7 @@
         </div>
     </div>
 </div>
-<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="References-modal modal fade" id="ReferencesModal4" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -433,7 +468,7 @@
                     <div class="modal-body">
                         <h2>Project Title</h2>
                         <hr class="star-primary">
-                        <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
+                        <img src="img/References/game.png" class="img-responsive img-centered" alt="">
                         <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                         <ul class="list-inline item-details">
                             <li>Client:
@@ -456,7 +491,7 @@
         </div>
     </div>
 </div>
-<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="References-modal modal fade" id="ReferencesModal5" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -470,7 +505,7 @@
                     <div class="modal-body">
                         <h2>Project Title</h2>
                         <hr class="star-primary">
-                        <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
+                        <img src="img/References/safe.png" class="img-responsive img-centered" alt="">
                         <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                         <ul class="list-inline item-details">
                             <li>Client:
@@ -493,7 +528,7 @@
         </div>
     </div>
 </div>
-<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="References-modal modal fade" id="ReferencesModal6" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -507,7 +542,7 @@
                     <div class="modal-body">
                         <h2>Project Title</h2>
                         <hr class="star-primary">
-                        <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
+                        <img src="img/References/submarine.png" class="img-responsive img-centered" alt="">
                         <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                         <ul class="list-inline item-details">
                             <li>Client:

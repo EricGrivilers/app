@@ -147,6 +147,15 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [210, 210], mode: outbound }
+        my_thumb2:
+            quality: 100
+            filters:
+                thumbnail: { size: [210, 210], mode: inset }
+        client:
+            quality: 100
+            filters:
+                thumbnail: { size: [310, 310], mode: inset, allow_upscale: true }
+                background: { size: [350, 350], color: '#fff' }
 
 fos_user:
     db_driver: orm # other valid values are 'orm',mongodb', 'couchdb' and 'propel'
