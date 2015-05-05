@@ -22,8 +22,9 @@ parameters:
     node_bin: /usr/bin/node
     node_modules: /usr/local/lib/node_modules
 
-    app_name: "Caravane media"
+    app_name: "My app"
+    app_webmaster_email: "me@myapp.com"
 
     shop_mail_sender_email: me@myshop.com
     shop_name: "My Shop"
-    shop_baseline: "Découvreur de vins"
+    shop_baseline: "a great new shop"

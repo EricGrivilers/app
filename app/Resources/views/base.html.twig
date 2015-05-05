@@ -37,6 +37,8 @@
     <![endif]-->
     #}
 
+    {% include "javascripts.required.html.twig" %}
+
 </head>
 
 <body id="page-top" class="index">
@@ -86,7 +88,7 @@
                 <div class="intro-text">
                     {#<span class="name">Start Bootstrap</span>
                     <hr class="star-light">#}
-                    <span class="skills">Web & App Development</span>
+                    <span class="skills">{#Web & App Development#}Montez, nous vous emmenons!</span>
                 </div>
             </div>
         </div>
@@ -136,7 +138,7 @@
         %}
         <div class="row">
             {%  for client in clients  %}
-                <div class="col-sm-2 References-item">
+                <div class="col-lg-2 col-xs-4 col-sm-3 References-item">
                     {#<a href="#ReferencesModal{{ loop.index }}" class="References-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
@@ -221,12 +223,71 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">
-                <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+            <div class="col-lg-8 col-lg-offset-2 " style="text-align: center">
+                <p>
+                    Simple, direct et efficace: avec nous, atteignez vos objectifs.</p>
+                <p>
+                    Une expertise et des outils pour optimiser votre production?<br/>
+                    Réunir plusieurs applications et bases de données en un seul outil simple?<br/>
+                    Diffuser sur le Web ou via des applications?<br/>
+                    Une meilleure visibilité sur le web et les réseaux sociaux?<br/>
+                    Créer ou améliorer votre communication ou votre image graphique?<br/>
+                </p>
+                {#<p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>#}
             </div>
-            <div class="col-lg-4">
+            {#<div class="col-lg-4">
                 <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+            </div>#}
+
+        </div>
+    </div>
+</section>
+
+
+<section  id="more">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4" >
+                <h3>Caravane media? Simple, en 4 points, avec vous au centre!</h3>
+                <p>1- Au centre, votre activité, vos besoins et vos souhaits. Nous écoutons, étudions vos productions et vos méthodes de travail.<br/>
+                2- Nous optimisons, vous conseillons et vous proposons des solutions à court et long terme en rapport avec votre budget.<br/>
+                3- Nous développons des outils simples et efficaces pour répondre à VOS besoins. Vous êtes totalement autonome sans que besoin de connaissance informatique.<br/>
+                4- Nous vous formons, vous escortons et vous supportons bien aprés la mise en ligne.</p>
             </div>
+            <div class="col-lg-4" >
+                <h3>Sûr ? La transparence est le plus court chemin vers l’efficacité!</h3>
+                <p>
+                    Les clients apprécient le "way of work" sans tabou, avec professionnalisme et entrain des équipiers de Caravane média, seniors sur leur terrain depuis plus de 10 ans.
+                </p>
+            </div>
+            <div class="col-lg-4" >
+                <h3>Ce qui explique que nos client fassent de longues routes avec nous?  Nous relevons tous vos défis et vous pouvez compter sur nous!</h3>
+                <p>
+                    Clause de confidentialité pour vos données, transparence, engagement, nous restons à vos côtés dans toutes vos deadlines et urgences, nous appliquons une règle de non-concurrence stricte envers nos partenaires et nos apporteurs d'affaires. Votre confiance est notre plus grande récompense.
+                </p>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-4" >
+                <h3>Vous représentez un client ? Nous serons votre support, vous pouvez compter sur nous à vos côtés! </h3>
+                <p>
+                Nous partageons la route avec vous, à votre convenance, sans concurrence et en toute transparence.<br/>
+                Nous créons des outils simples qui ne ne nécessitent pas de connaissance informatiques préalables.</div>
+            <div class="col-lg-4" >
+                <h3>Léger ? Caravane media est une petite structure qui relève de grands défis à moindre prix! </h3>
+                <p>
+                Indépendante, mobile  et...  moins chère. Vous ne serez jamais perdu. Votre responsable de projet vous écoute, vous conseille, vous assiste et vous évite les coûts superflus.
+                </p>
+            </div>
+            <div class="col-lg-4" >
+                <h3>Faire un bout de route ensemble? Montez, nous vous emmenons plus loin! </h3>
+                <p>
+                Nous pouvons nous charger de l'ensemble de votre communication, intervenir sur une étape de celle-ci, rassembler vos applications et bases de données en un seul outil, être consultant ou vous aider à rédiger un cahier des charges.
+                </p>
+
+            </div>
+
 
         </div>
     </div>
@@ -245,32 +306,43 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                 <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                <form name="sentMessage" id="contactForm" novalidate>
+
+                {%  if sent is defined  %}
+                    <p class="alert alert-success" style="text-align:center">
+                        Votre message a bien été envoyé.<br/>Nous reviendrons vers vous dans les plus brefs délais.
+                    </p>
+                {%  else %}
+                    {%  if error is defined  %}
+                        <p class="alert alert-danger">
+                            Adresse email non valide
+                        </p>
+                        {% endif %}
+                <form name="sentMessage" id="contactForm" novalidate action="{{ path('caravane_cms_homepage') }}#contact" method="post">
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                            <label>Nom</label>
+                            <input type="text" class="form-control" placeholder="Nom" id="name" name="name" required />
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Email" id="email" name="email" required / >
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                            <label>Téléphone</label>
+                            <input type="tel" class="form-control" placeholder="Téléphone" id="phone" name="phone"   />
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Message</label>
-                            <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                            <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" required "></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -282,6 +354,7 @@
                         </div>
                     </div>
                 </form>
+                {%  endif %}
             </div>
         </div>
     </div>
@@ -342,229 +415,6 @@
     </a>
 </div>
 
-<!-- References Modals -->
-<div class="References-modal modal fade" id="ReferencesModal1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-                <div class="rl">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="modal-body">
-                        <h2>Project Title</h2>
-                        <hr class="star-primary">
-                        <img src="img/References/cabin.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                        <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
-                        </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="References-modal modal fade" id="ReferencesModal2" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-                <div class="rl">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="modal-body">
-                        <h2>Project Title</h2>
-                        <hr class="star-primary">
-                        <img src="img/References/cake.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                        <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
-                        </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="References-modal modal fade" id="ReferencesModal3" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-                <div class="rl">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="modal-body">
-                        <h2>Project Title</h2>
-                        <hr class="star-primary">
-                        <img src="img/References/circus.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                        <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
-                        </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="References-modal modal fade" id="ReferencesModal4" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-                <div class="rl">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="modal-body">
-                        <h2>Project Title</h2>
-                        <hr class="star-primary">
-                        <img src="img/References/game.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                        <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
-                        </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="References-modal modal fade" id="ReferencesModal5" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-                <div class="rl">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="modal-body">
-                        <h2>Project Title</h2>
-                        <hr class="star-primary">
-                        <img src="img/References/safe.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                        <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
-                        </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="References-modal modal fade" id="ReferencesModal6" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-        <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-                <div class="rl">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="modal-body">
-                        <h2>Project Title</h2>
-                        <hr class="star-primary">
-                        <img src="img/References/submarine.png" class="img-responsive img-centered" alt="">
-                        <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                        <ul class="list-inline item-details">
-                            <li>Client:
-                                <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                </strong>
-                            </li>
-                            <li>Date:
-                                <strong><a href="http://startbootstrap.com">April 2014</a>
-                                </strong>
-                            </li>
-                            <li>Service:
-                                <strong><a href="http://startbootstrap.com">Web Development</a>
-                                </strong>
-                            </li>
-                        </ul>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {% block javascripts %}
     {% include "javascripts.app.html.twig" %}
     {% if app.user %}

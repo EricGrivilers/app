@@ -1,0 +1,4 @@
+services:
+#    caravane_sales.example:
+#        class: Caravane\Bundle\SalesBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
