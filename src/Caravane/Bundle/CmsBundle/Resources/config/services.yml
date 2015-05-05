@@ -3,3 +3,9 @@ services:
         class: Caravane\Bundle\CmsBundle\Twig\NodeExtension
         tags:
             - { name: twig.extension }
+
+    caravane_cms.phpcr.initializer:
+        class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
+        arguments: [ 'Cms', ['/','/cms', '/cms/page','/cms/area','/cms/node'] ]
+        tags:
+            - { name: "doctrine_phpcr.initializer" }

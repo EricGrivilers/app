@@ -22,6 +22,9 @@ parameters:
     node_bin: /usr/bin/node
     node_modules: /usr/local/lib/node_modules
 
+    phpcr_admin_username: admin
+    phpcr_admin_password: admin
+
     app_name: "My app"
     app_webmaster_email: "me@myapp.com"
 

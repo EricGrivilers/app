@@ -2,3 +2,8 @@ services:
 #    caravane_sales.example:
 #        class: Caravane\Bundle\SalesBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    caravane_sales.phpcr.initializer:
+            class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
+            arguments: [ 'Sales', ['/','/sales', '/sales/quote','/sales/invoice'] ]
+            tags:
+                - { name: "doctrine_phpcr.initializer" }

@@ -5,7 +5,7 @@ namespace Caravane\Bundle\ShopBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Caravane\Bundle\ShopBundle\Entity\Category;
+use Caravane\Bundle\ShopBundle\Document\Category;
 use Caravane\Bundle\ShopBundle\Form\CategoryType;
 
 /**
@@ -21,12 +21,11 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('CaravaneShopBundle:Category')->findAll();
-
+        $dm = $this->get('doctrine_phpcr')->getManager();
+        $documents = $dm->find(null, '/shop/category');
+echo count($documents);
         return $this->render('CaravaneShopBundle:Category:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $documents,
         ));
     }
     /**
@@ -35,16 +34,30 @@ class CategoryController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Category();
-        $form = $this->createCreateForm($entity);
+        $document = new Category();
+        $form = $this->createCreateForm($document);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entity->setInsertDate(new \Datetime('now'));
-            $entity->setUpdateDate(new \Datetime('now'));
-            $em = $this->getDoctrine()->getManager();
+            //$entity->setInsertDate(new \Datetime('now'));
+            //$entity->setUpdateDate(new \Datetime('now'));
+            /*$em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            $em->flush();
+            $em->flush();*/
+            $dm = $this->get('doctrine_phpcr')->getManager();
+            if(!$productCategory = $dm->find(null, '/category/product')) {
+                if(!$rootCategory = $dm->find(null, '/category')) {
+                    $rootCategory=new Category();
+                    $rootCategory->setName('category');
+                    $dm->persist($rootCategory);
+                }
+                $productCategory=new Category();
+                $productCategory->setName('product');
+                $productCategory->setParent($rootCategory);
+                $dm->persist($rootCategory);
+
+                $dm->flush();
+            }
 
             return $this->redirect($this->generateUrl('admin_shop_category_show', array('id' => $entity->getId())));
         }

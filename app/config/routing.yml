@@ -23,6 +23,11 @@ fos_js_routing:
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
+
+cmf_tree:
+    resource: .
+    type: 'cmf_tree'
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

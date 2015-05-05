@@ -129,6 +129,31 @@ doctrine:
                 alias: GedmoTree # this one is optional and will default to the name set for the mapping
                 is_bundle: false
 
+doctrine_cache:
+    providers:
+        phpcr_meta:
+            type: file_system
+        phpcr_nodes:
+            type: file_system
+
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+            # requires DoctrineCacheBundle
+            caches:
+                meta: doctrine_cache.providers.phpcr_meta
+                nodes: doctrine_cache.providers.phpcr_nodes
+            # enable logging
+            logging: true
+            # enable profiling in the debug toolbar.
+            profiling: true
+        workspace: default
+        username: "%phpcr_admin_username%"
+        password: "%phpcr_admin_password%"
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
 
 # Swiftmailer Configuration
 swiftmailer:
