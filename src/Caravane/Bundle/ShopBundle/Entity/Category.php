@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Category
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Caravane\ShopBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  * @Gedmo\Tree(type="nested")
  */
 class Category
