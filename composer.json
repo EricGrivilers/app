@@ -47,7 +47,8 @@
         "vakata/jstree": "dev-master",
         "moment/moment": "dev-master",
 
-        "geedmo/yamm3": "dev-master"
+        "geedmo/yamm3": "dev-master",
+        "cocur/slugify": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

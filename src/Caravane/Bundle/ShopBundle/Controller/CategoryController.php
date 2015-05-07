@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $dm = $this->get('doctrine_phpcr')->getManager();
         $documents = $dm->find(null, '/shop/category');
-echo count($documents);
+        echo count($documents);
         return $this->render('CaravaneShopBundle:Category:index.html.twig', array(
             'entities' => $documents,
         ));

@@ -6,6 +6,6 @@ services:
 
     caravane_cms.phpcr.initializer:
         class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
-        arguments: [ 'Cms', ['/','/cms', '/cms/page','/cms/area','/cms/node'] ]
+        arguments: [ 'Cms', ['/','/cms', '/cms/page','/cms/area','/cms/node', '/cms/category', '/cms/page/homepage'] ]
         tags:
             - { name: "doctrine_phpcr.initializer" }
