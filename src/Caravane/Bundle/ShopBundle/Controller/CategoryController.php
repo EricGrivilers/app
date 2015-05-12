@@ -34,17 +34,19 @@ class CategoryController extends Controller
      */
     public function createAction(Request $request)
     {
+
         $dm = $this->get('doctrine_phpcr')->getManager();
         $category = new Category();
         $form = $this->createCreateForm($category);
 
         $form->handleRequest($request);
-       
+
 
         if(!$category->getParent()) {
             $rootCategory = $dm->find(null, '/shop/category');
             $category->setParent($rootCategory);
         }
+       
         if(!$category->getDescription()) {
             $category->setDescription($category->getName());
         }
@@ -54,7 +56,7 @@ class CategoryController extends Controller
             $dm->persist($category);
             $dm->flush();
 
-            return $this->redirect($this->generateUrl('admin_shop_category_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_shop_category_show', array('id' => $category->getId())));
         }
 
         return $this->render('CaravaneShopBundle:Category:new.html.twig', array(

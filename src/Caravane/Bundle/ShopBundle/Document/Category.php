@@ -2,11 +2,13 @@
 namespace Caravane\Bundle\ShopBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Doctrine\Bundle\PHPCRBundle\Validator\Constraints as OdmAssert;
 use Caravane\Bundle\ShopBundle\Document\Category;
 
 
 /**
  * @PHPCR\Document(repositoryClass="Caravane\Bundle\ShopBundle\Repository\CategoryRepository")
+ * @OdmAssert\ValidPhpcrOdm
  */
 class Category
 {
@@ -37,7 +39,7 @@ class Category
     protected $children;
 
     /**
-     * @PHPCR\ParentDocument()
+     * @PHPCR\ParentDocument(nullable=true)
      */
     protected $parent;
 
