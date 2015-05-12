@@ -36,6 +36,7 @@ twig:
     form:
         resources:
             - 'bootstrap_3_layout.html.twig'
+            - 'CaravaneCmsBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:

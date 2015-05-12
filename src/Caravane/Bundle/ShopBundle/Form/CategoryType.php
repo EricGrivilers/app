@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Doctrine\ODM\PHPCR\DocumentRepository;
+
+
 class CategoryType extends AbstractType
 {
     /**
@@ -17,7 +20,15 @@ class CategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('active')
-            ->add('parent')
+            ->add('parent', 'phpcr_document', array(
+                'property' => 'id',
+                'class'=> 'Caravane\Bundle\ShopBundle\Document\Category',
+                'multiple'=>false,
+                /*'query_builder' => function (DocumentRepository $er) {
+                    return $er->getTree()
+                        ;
+                },*/
+            ))
         ;
     }
     
@@ -27,7 +38,7 @@ class CategoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Caravane\ShopBundle\Entity\Category'
+            'data_class' => 'Caravane\Bundle\ShopBundle\Document\Category'
         ));
     }
 
@@ -38,4 +49,6 @@ class CategoryType extends AbstractType
     {
         return 'caravane_shopbundle_category';
     }
+
+
 }

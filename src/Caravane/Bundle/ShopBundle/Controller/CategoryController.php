@@ -22,8 +22,8 @@ class CategoryController extends Controller
     public function indexAction()
     {
         $dm = $this->get('doctrine_phpcr')->getManager();
-        $documents = $dm->find(null, '/shop/category');
-        echo count($documents);
+        $documents = $dm->find('Caravane\Bundle\ShopBundle\Document\Category', '/shop/category');
+
         return $this->render('CaravaneShopBundle:Category:index.html.twig', array(
             'entities' => $documents,
         ));
@@ -34,36 +34,31 @@ class CategoryController extends Controller
      */
     public function createAction(Request $request)
     {
-        $document = new Category();
-        $form = $this->createCreateForm($document);
+        $dm = $this->get('doctrine_phpcr')->getManager();
+        $category = new Category();
+        $form = $this->createCreateForm($category);
+
         $form->handleRequest($request);
+       
+
+        if(!$category->getParent()) {
+            $rootCategory = $dm->find(null, '/shop/category');
+            $category->setParent($rootCategory);
+        }
+        if(!$category->getDescription()) {
+            $category->setDescription($category->getName());
+        }
 
         if ($form->isValid()) {
-            //$entity->setInsertDate(new \Datetime('now'));
-            //$entity->setUpdateDate(new \Datetime('now'));
-            /*$em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();*/
-            $dm = $this->get('doctrine_phpcr')->getManager();
-            if(!$productCategory = $dm->find(null, '/category/product')) {
-                if(!$rootCategory = $dm->find(null, '/category')) {
-                    $rootCategory=new Category();
-                    $rootCategory->setName('category');
-                    $dm->persist($rootCategory);
-                }
-                $productCategory=new Category();
-                $productCategory->setName('product');
-                $productCategory->setParent($rootCategory);
-                $dm->persist($rootCategory);
 
-                $dm->flush();
-            }
+            $dm->persist($category);
+            $dm->flush();
 
             return $this->redirect($this->generateUrl('admin_shop_category_show', array('id' => $entity->getId())));
         }
 
         return $this->render('CaravaneShopBundle:Category:new.html.twig', array(
-            'entity' => $entity,
+            'category' => $category,
             'form'   => $form->createView(),
         ));
     }
@@ -93,11 +88,11 @@ class CategoryController extends Controller
      */
     public function newAction()
     {
-        $entity = new Category();
-        $form   = $this->createCreateForm($entity);
+        $document = new Category();
+        $form   = $this->createCreateForm($document);
 
         return $this->render('CaravaneShopBundle:Category:new.html.twig', array(
-            'entity' => $entity,
+            'category' => $document,
             'form'   => $form->createView(),
         ));
     }

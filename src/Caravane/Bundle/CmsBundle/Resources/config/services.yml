@@ -9,3 +9,10 @@ services:
         arguments: [ 'Cms', ['/','/cms', '/cms/page','/cms/area','/cms/node', '/cms/category', '/cms/page/homepage'] ]
         tags:
             - { name: "doctrine_phpcr.initializer" }
+
+
+
+    caravane_cms.form.type.tree:
+            class: Caravane\Bundle\CmsBundle\Form\Type\TreeType
+            tags:
+                - { name: form.type, alias: caravane_cms_tree }

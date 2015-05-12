@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
+
             new AppBundle\AppBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
             new Caravane\Bundle\ShopBundle\CaravaneShopBundle(),

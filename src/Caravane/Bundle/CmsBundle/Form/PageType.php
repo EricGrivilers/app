@@ -44,6 +44,6 @@ class PageType extends AbstractType
      */
     public function getName()
     {
-        return 'caravane_bundle_cmsbundle_page';
+        return 'caravane_cmsbundle_page';
     }
 }
