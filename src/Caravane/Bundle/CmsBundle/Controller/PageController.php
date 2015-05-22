@@ -5,7 +5,7 @@ namespace Caravane\Bundle\CmsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Caravane\Bundle\CmsBundle\Entity\Page;
+use Caravane\Bundle\CmsBundle\Document\Page;
 use Caravane\Bundle\CmsBundle\Form\PageType;
 
 /**
@@ -21,12 +21,13 @@ class PageController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $dm = $this->get('doctrine_phpcr')->getManager();
+        $pages = $dm->getRepository('CaravaneCmsBundle:Page')->findAll();
+        //$pages = $dm->find("Caravane/Bundle/CmsBundle/Document/Page", '/cms/pages');
 
-        $entities = $em->getRepository('CaravaneCmsBundle:Page')->findAll();
-
+        //echo count($pages);
         return $this->render('CaravaneCmsBundle:Page:index.html.twig', array(
-            'entities' => $entities,
+            'pages' => $pages,
         ));
     }
     /**
@@ -35,20 +36,25 @@ class PageController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Page();
-        $form = $this->createCreateForm($entity);
+        $dm = $this->get('doctrine_phpcr')->getManager();
+        $page = new Page();
+        $form = $this->createCreateForm($page);
         $form->handleRequest($request);
 
+        $rootPage = $dm->find(null, '/cms/page');
+        //$page->setParent($rootPage);
+        $page->setName($page->getTitle());
+        $page->setSlug($page->getTitle());
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_cms_page_show', array('id' => $entity->getId())));
+            $dm->persist($page);
+            $dm->flush();
+
+            return $this->redirect($this->generateUrl('admin_cms_page_show', array('name' => $page->getName())));
         }
 
         return $this->render('CaravaneCmsBundle:Page:new.html.twig', array(
-            'entity' => $entity,
+            'page' => $page,
             'form'   => $form->createView(),
         ));
     }
@@ -78,11 +84,11 @@ class PageController extends Controller
      */
     public function newAction()
     {
-        $entity = new Page();
-        $form   = $this->createCreateForm($entity);
+        $page = new Page();
+        $form   = $this->createCreateForm($page);
 
         return $this->render('CaravaneCmsBundle:Page:new.html.twig', array(
-            'entity' => $entity,
+            'page' => $page,
             'form'   => $form->createView(),
         ));
     }
@@ -91,11 +97,11 @@ class PageController extends Controller
      * Finds and displays a Page entity.
      *
      */
-    public function showAction($id)
+    public function showAction($name)
     {
-        $em = $this->getDoctrine()->getManager();
+        $dm = $this->get('doctrine_phpcr')->getManager();
 
-        $entity = $em->getRepository('CaravaneCmsBundle:Page')->find($id);
+        $entity = $dm->getRepository('CaravaneCmsBundle:Page')->find('/cms/page/'.$name);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');

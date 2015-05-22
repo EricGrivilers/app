@@ -4,8 +4,30 @@ services:
         tags:
             - { name: twig.extension }
 
-    caravane_cms.phpcr.initializer:
-        class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
-        arguments: [ 'Cms', ['/','/cms', '/cms/page','/cms/area','/cms/node'] ]
-        tags:
-            - { name: "doctrine_phpcr.initializer" }
+    #caravane_cms.phpcr.initializer:
+    #    class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
+    #    arguments: [ 'Cms', ['/','/cms', '/cms/page','/cms/area','/cms/node', '/cms/category', '/cms/page/homepage'] ]
+    #    tags:
+    #        - { name: "doctrine_phpcr.initializer" }
+
+    caravane_cms.phpcr.initializer.site:
+            class: Caravane\Bundle\CmsBundle\Initializer\SiteInitializer
+            tags:
+                - { name: doctrine_phpcr.initializer, priority: 50 }
+
+    caravane_cms.form.type.tree:
+            class: Caravane\Bundle\CmsBundle\Form\Type\TreeType
+            tags:
+                - { name: form.type, alias: caravane_cms_tree }
+
+
+    caravane_cms.menu_provider:
+            class: Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider
+            arguments:
+                - '@cmf_menu.factory'
+                - '@doctrine_phpcr'
+                - /cms/pages
+            calls:
+                - [setRequest, ["@?request="]]
+            tags:
+                - { name: knp_menu.provider }

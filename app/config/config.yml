@@ -36,6 +36,7 @@ twig:
     form:
         resources:
             - 'bootstrap_3_layout.html.twig'
+            - 'CaravaneCmsBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -213,3 +214,25 @@ stof_doctrine_extensions:
             sluggable: true
             translatable: true
             timestampable: true
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            cmf_routing.dynamic_router: 20
+            router.default: 100
+    dynamic:
+        enabled: true
+        persistence:
+            phpcr:
+                route_basepath: /cms/routes
+        controllers_by_class:
+                Caravane\Bundle\CmsBundle\Document\Page: Caravane\Bundle\CmsBundle\Controller\DefaultController::pageAction
+
+cmf_routing_auto:
+    persistence:
+        phpcr:
+            enabled: true
+
+
+knp_menu:
+    twig: true

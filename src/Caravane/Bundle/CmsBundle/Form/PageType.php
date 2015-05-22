@@ -17,10 +17,11 @@ class PageType extends AbstractType
         $builder
             ->add('slug')
             ->add('title')
-            ->add('template')
-            ->add('public')
-
-            ->add('parent')
+            ->add('parent', 'phpcr_document', array(
+               'property' => 'title',
+               'class'=> 'Caravane\Bundle\CmsBundle\Document\Page',
+               'multiple'=>false
+           ))
 
         ;
     }
@@ -31,7 +32,7 @@ class PageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Caravane\Bundle\CmsBundle\Entity\Page'
+            'data_class' => 'Caravane\Bundle\CmsBundle\Document\Page'
         ));
     }
 
@@ -40,6 +41,6 @@ class PageType extends AbstractType
      */
     public function getName()
     {
-        return 'caravane_bundle_cmsbundle_page';
+        return 'caravane_cmsbundle_page';
     }
 }
