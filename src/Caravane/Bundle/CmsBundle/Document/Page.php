@@ -8,7 +8,7 @@ use Cocur\Slugify\Slugify;
 use Caravane\Bundle\CmsBundle\Document\Category;
 
 /**
-* @PHPCR\Document()
+* @PHPCR\Document(referenceable=true)
 */
 class Page
 {
@@ -84,6 +84,12 @@ class Page
     {
         $this->parent = $parent;
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
@@ -103,6 +109,7 @@ class Page
     {
         return $this->slug;
     }
+
     public function setSlug($slug)
     {
         if(is_null($slug)) {

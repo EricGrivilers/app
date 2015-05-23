@@ -21,7 +21,7 @@ class CategoryType extends AbstractType
             ->add('name')
             ->add('active')
             ->add('parent', 'phpcr_document', array(
-                'property' => 'id',
+                'property' => 'name',
                 'class'=> 'Caravane\Bundle\ShopBundle\Document\Category',
                 'multiple'=>false,
                 /*'query_builder' => function (DocumentRepository $er) {

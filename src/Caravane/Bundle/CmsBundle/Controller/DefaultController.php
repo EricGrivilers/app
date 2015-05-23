@@ -39,4 +39,22 @@ class DefaultController extends Controller
         }
         return $this->render('CaravaneCmsBundle:Default:index.html.twig', array());
     }
+
+
+
+
+
+
+
+
+    public function pageAction($contentDocument)
+    {
+        $dm = $this->get('doctrine_phpcr')->getManager();
+        //$posts = $dm->getRepository('AcmeBasicCmsBundle:Post')->findAll();
+
+        return array(
+            'page'  => $contentDocument,
+            //'posts' => $posts,
+        );
+    }
 }

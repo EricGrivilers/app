@@ -13,7 +13,7 @@
 }(function ($, undefined) {
 	"use strict";
 /*!
- * jsTree 3.1.0
+ * jsTree 3.1.1
  * http://jstree.com/
  *
  * Copyright (c) 2014 Ivan Bozhanov (http://vakata.com)
@@ -71,7 +71,7 @@
 		 * specifies the jstree version in use
 		 * @name $.jstree.version
 		 */
-		version : '3.1.0',
+		version : '3.1.1',
 		/**
 		 * holds all the default options used when creating new instances
 		 * @name $.jstree.defaults
@@ -1932,7 +1932,7 @@
 			if(tmp.length) {
 				data.icon = tmp.hasClass('jstree-themeicon-hidden') ? false : tmp.attr('rel');
 			}
-			if(data.state.icon) {
+			if(data.state.icon !== undefined) {
 				data.icon = data.state.icon;
 			}
 			if(data.icon === undefined || data.icon === null || data.icon === "") {
@@ -3157,7 +3157,7 @@
 		 * sets the state of the tree. Used internally.
 		 * @name set_state(state [, callback])
 		 * @private
-		 * @param {Object} state the state to restore
+		 * @param {Object} state the state to restore. Keep in mind this object is passed by reference and jstree will modify it.
 		 * @param {Function} callback an optional function to execute once the state is restored.
 		 * @trigger set_state.jstree
 		 */
@@ -3247,6 +3247,10 @@
 					state : { loaded : false }
 				}
 			};
+			this._data.core.selected = [];
+			this._data.core.last_clicked = null;
+			this._data.core.focused = null;
+
 			var c = this.get_container_ul()[0].className;
 			if(!skip_loading) {
 				this.element.html("<"+"ul class='"+c+"' role='group'><"+"li class='jstree-initial-node jstree-loading jstree-leaf jstree-last' role='treeitem' id='j"+this._id+"_loading'><i class='jstree-icon jstree-ocl'></i><"+"a class='jstree-anchor' href='#'><i class='jstree-icon jstree-themeicon-hidden'></i>" + this.get_string("Loading ...") + "</a></li></ul>");
@@ -4521,7 +4525,7 @@
 							dpc = data.nodes,
 							i, j;
 						for(i = 0, j = dpc.length; i < j; i++) {
-							m[dpc[i]].state.checked = (m[dpc[i]].original && m[dpc[i]].original.state && m[dpc[i]].original.state.checked);
+							m[dpc[i]].state.checked = m[dpc[i]].state.checked || (m[dpc[i]].original && m[dpc[i]].original.state && m[dpc[i]].original.state.checked);
 							if(m[dpc[i]].state.checked) {
 								this._data.checkbox.selected.push(dpc[i]);
 							}
@@ -5172,6 +5176,12 @@
 			}
 			return res;
 		};
+		this.refresh = function (skip_loading, forget_state) {
+			if(!this.settings.checkbox.tie_selection) {
+				this._data.checkbox.selected = [];
+			}
+			return parent.refresh.apply(this, arguments);
+		};
 	};
 
 	// include the checkbox plugin by default
@@ -5817,7 +5827,7 @@
 		 */
 		open_timeout : 500,
 		/**
-		 * a function invoked each time a node is about to be dragged, invoked in the tree's scope and receives the nodes about to be dragged as an argument (array) - return `false` to prevent dragging
+		 * a function invoked each time a node is about to be dragged, invoked in the tree's scope and receives the nodes about to be dragged as an argument (array) and the event that started the drag - return `false` to prevent dragging
 		 * @name $.jstree.defaults.dnd.is_draggable
 		 * @plugin dnd
 		 */
@@ -5885,7 +5895,7 @@
 						txt = $.vakata.html.escape(txt);
 					}
 					if(obj && obj.id && obj.id !== "#" && (e.which === 1 || e.type === "touchstart") &&
-						(this.settings.dnd.is_draggable === true || ($.isFunction(this.settings.dnd.is_draggable) && this.settings.dnd.is_draggable.call(this, (mlt > 1 ? this.get_top_selected(true) : [obj]))))
+						(this.settings.dnd.is_draggable === true || ($.isFunction(this.settings.dnd.is_draggable) && this.settings.dnd.is_draggable.call(this, (mlt > 1 ? this.get_top_selected(true) : [obj]), e)))
 					) {
 						this.element.trigger('mousedown.jstree');
 						return $.vakata.dnd.start(e, { 'jstree' : true, 'origin' : this, 'obj' : this.get_node(obj,true), 'nodes' : mlt > 1 ? this.get_top_selected() : [obj.id] }, '<div id="jstree-dnd" class="jstree-' + this.get_theme() + ' jstree-' + this.get_theme() + '-' + this.get_theme_variant() + ' ' + ( this.settings.core.themes.responsive ? ' jstree-dnd-responsive' : '' ) + '"><i class="jstree-icon jstree-er"></i>' + txt + '<ins class="jstree-copy" style="display:none;">+</ins></div>');

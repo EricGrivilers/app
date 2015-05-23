@@ -22,8 +22,10 @@ class PageController extends Controller
     public function indexAction()
     {
         $dm = $this->get('doctrine_phpcr')->getManager();
-        $pages = $dm->find(null, '/cms/page');
+        $pages = $dm->getRepository('CaravaneCmsBundle:Page')->findAll();
+        //$pages = $dm->find("Caravane/Bundle/CmsBundle/Document/Page", '/cms/pages');
 
+        //echo count($pages);
         return $this->render('CaravaneCmsBundle:Page:index.html.twig', array(
             'pages' => $pages,
         ));
@@ -40,7 +42,7 @@ class PageController extends Controller
         $form->handleRequest($request);
 
         $rootPage = $dm->find(null, '/cms/page');
-        $page->setParent($rootPage);
+        //$page->setParent($rootPage);
         $page->setName($page->getTitle());
         $page->setSlug($page->getTitle());
         if ($form->isValid()) {

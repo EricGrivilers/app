@@ -30513,7 +30513,7 @@ if (typeof jQuery === 'undefined') {
 
 define('jquery', function (require, exports, module) {
 /*!
- * jQuery JavaScript Library v2.1.3
+ * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -30523,7 +30523,7 @@ define('jquery', function (require, exports, module) {
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2014-12-18T15:11Z
+ * Date: 2015-04-28T16:01Z
  */
 
 (function( global, factory ) {
@@ -30581,7 +30581,7 @@ var
 	// Use the correct document accordingly with window argument (sandbox)
 	document = window.document,
 
-	version = "2.1.3",
+	version = "2.1.4",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -31045,7 +31045,12 @@ jQuery.each("Boolean Number String Function Array Date RegExp Object Error".spli
 });
 
 function isArraylike( obj ) {
-	var length = obj.length,
+
+	// Support: iOS 8.2 (not reproducible in simulator)
+	// `in` check used to prevent JIT error (gh-2145)
+	// hasOwn isn't used here due to false negatives
+	// regarding Nodelist length in IE
+	var length = "length" in obj && obj.length,
 		type = jQuery.type( obj );
 
 	if ( type === "function" || jQuery.isWindow( obj ) ) {
@@ -39722,7 +39727,7 @@ return jQuery;
 
 define('moment', function (require, exports, module) {
 //! moment.js
-//! version : 2.10.2
+//! version : 2.10.3
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -39745,28 +39750,12 @@ define('moment', function (require, exports, module) {
         hookCallback = callback;
     }
 
-    function defaultParsingFlags() {
-        // We need to deep clone this object.
-        return {
-            empty           : false,
-            unusedTokens    : [],
-            unusedInput     : [],
-            overflow        : -2,
-            charsLeftOver   : 0,
-            nullInput       : false,
-            invalidMonth    : null,
-            invalidFormat   : false,
-            userInvalidated : false,
-            iso             : false
-        };
-    }
-
     function isArray(input) {
         return Object.prototype.toString.call(input) === '[object Array]';
     }
 
     function isDate(input) {
-        return Object.prototype.toString.call(input) === '[object Date]' || input instanceof Date;
+        return input instanceof Date || Object.prototype.toString.call(input) === '[object Date]';
     }
 
     function map(arr, fn) {
@@ -39803,21 +39792,45 @@ define('moment', function (require, exports, module) {
         return createLocalOrUTC(input, format, locale, strict, true).utc();
     }
 
+    function defaultParsingFlags() {
+        // We need to deep clone this object.
+        return {
+            empty           : false,
+            unusedTokens    : [],
+            unusedInput     : [],
+            overflow        : -2,
+            charsLeftOver   : 0,
+            nullInput       : false,
+            invalidMonth    : null,
+            invalidFormat   : false,
+            userInvalidated : false,
+            iso             : false
+        };
+    }
+
+    function getParsingFlags(m) {
+        if (m._pf == null) {
+            m._pf = defaultParsingFlags();
+        }
+        return m._pf;
+    }
+
     function valid__isValid(m) {
         if (m._isValid == null) {
+            var flags = getParsingFlags(m);
             m._isValid = !isNaN(m._d.getTime()) &&
-                m._pf.overflow < 0 &&
-                !m._pf.empty &&
-                !m._pf.invalidMonth &&
-                !m._pf.nullInput &&
-                !m._pf.invalidFormat &&
-                !m._pf.userInvalidated;
+                flags.overflow < 0 &&
+                !flags.empty &&
+                !flags.invalidMonth &&
+                !flags.nullInput &&
+                !flags.invalidFormat &&
+                !flags.userInvalidated;
 
             if (m._strict) {
                 m._isValid = m._isValid &&
-                    m._pf.charsLeftOver === 0 &&
-                    m._pf.unusedTokens.length === 0 &&
-                    m._pf.bigHour === undefined;
+                    flags.charsLeftOver === 0 &&
+                    flags.unusedTokens.length === 0 &&
+                    flags.bigHour === undefined;
             }
         }
         return m._isValid;
@@ -39826,10 +39839,10 @@ define('moment', function (require, exports, module) {
     function valid__createInvalid (flags) {
         var m = create_utc__createUTC(NaN);
         if (flags != null) {
-            extend(m._pf, flags);
+            extend(getParsingFlags(m), flags);
         }
         else {
-            m._pf.userInvalidated = true;
+            getParsingFlags(m).userInvalidated = true;
         }
 
         return m;
@@ -39865,7 +39878,7 @@ define('moment', function (require, exports, module) {
             to._offset = from._offset;
         }
         if (typeof from._pf !== 'undefined') {
-            to._pf = from._pf;
+            to._pf = getParsingFlags(from);
         }
         if (typeof from._locale !== 'undefined') {
             to._locale = from._locale;
@@ -39900,7 +39913,7 @@ define('moment', function (require, exports, module) {
     }
 
     function isMoment (obj) {
-        return obj instanceof Moment || (obj != null && hasOwnProp(obj, '_isAMomentObject'));
+        return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
     }
 
     function toInt(argumentForCoercion) {
@@ -40338,7 +40351,7 @@ define('moment', function (require, exports, module) {
         if (month != null) {
             array[MONTH] = month;
         } else {
-            config._pf.invalidMonth = input;
+            getParsingFlags(config).invalidMonth = input;
         }
     });
 
@@ -40422,7 +40435,7 @@ define('moment', function (require, exports, module) {
         var overflow;
         var a = m._a;
 
-        if (a && m._pf.overflow === -2) {
+        if (a && getParsingFlags(m).overflow === -2) {
             overflow =
                 a[MONTH]       < 0 || a[MONTH]       > 11  ? MONTH :
                 a[DATE]        < 1 || a[DATE]        > daysInMonth(a[YEAR], a[MONTH]) ? DATE :
@@ -40432,11 +40445,11 @@ define('moment', function (require, exports, module) {
                 a[MILLISECOND] < 0 || a[MILLISECOND] > 999 ? MILLISECOND :
                 -1;
 
-            if (m._pf._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
+            if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
                 overflow = DATE;
             }
 
-            m._pf.overflow = overflow;
+            getParsingFlags(m).overflow = overflow;
         }
 
         return m;
@@ -40449,10 +40462,12 @@ define('moment', function (require, exports, module) {
     }
 
     function deprecate(msg, fn) {
-        var firstTime = true;
+        var firstTime = true,
+            msgWithStack = msg + '\n' + (new Error()).stack;
+
         return extend(function () {
             if (firstTime) {
-                warn(msg);
+                warn(msgWithStack);
                 firstTime = false;
             }
             return fn.apply(this, arguments);
@@ -40497,7 +40512,7 @@ define('moment', function (require, exports, module) {
             match = from_string__isoRegex.exec(string);
 
         if (match) {
-            config._pf.iso = true;
+            getParsingFlags(config).iso = true;
             for (i = 0, l = isoDates.length; i < l; i++) {
                 if (isoDates[i][1].exec(string)) {
                     // match[5] should be 'T' or undefined
@@ -40777,7 +40792,7 @@ define('moment', function (require, exports, module) {
             yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
 
             if (config._dayOfYear > daysInYear(yearToUse)) {
-                config._pf._overflowDayOfYear = true;
+                getParsingFlags(config)._overflowDayOfYear = true;
             }
 
             date = createUTCDate(yearToUse, 0, config._dayOfYear);
@@ -40873,7 +40888,7 @@ define('moment', function (require, exports, module) {
         }
 
         config._a = [];
-        config._pf.empty = true;
+        getParsingFlags(config).empty = true;
 
         // This array is used to make a Date, either with `new Date` or `Date.UTC`
         var string = '' + config._i,
@@ -40889,7 +40904,7 @@ define('moment', function (require, exports, module) {
             if (parsedInput) {
                 skipped = string.substr(0, string.indexOf(parsedInput));
                 if (skipped.length > 0) {
-                    config._pf.unusedInput.push(skipped);
+                    getParsingFlags(config).unusedInput.push(skipped);
                 }
                 string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
                 totalParsedInputLength += parsedInput.length;
@@ -40897,27 +40912,29 @@ define('moment', function (require, exports, module) {
             // don't parse if it's not a known token
             if (formatTokenFunctions[token]) {
                 if (parsedInput) {
-                    config._pf.empty = false;
+                    getParsingFlags(config).empty = false;
                 }
                 else {
-                    config._pf.unusedTokens.push(token);
+                    getParsingFlags(config).unusedTokens.push(token);
                 }
                 addTimeToArrayFromToken(token, parsedInput, config);
             }
             else if (config._strict && !parsedInput) {
-                config._pf.unusedTokens.push(token);
+                getParsingFlags(config).unusedTokens.push(token);
             }
         }
 
         // add remaining unparsed input length to the string
-        config._pf.charsLeftOver = stringLength - totalParsedInputLength;
+        getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
         if (string.length > 0) {
-            config._pf.unusedInput.push(string);
+            getParsingFlags(config).unusedInput.push(string);
         }
 
         // clear _12h flag if hour is <= 12
-        if (config._pf.bigHour === true && config._a[HOUR] <= 12) {
-            config._pf.bigHour = undefined;
+        if (getParsingFlags(config).bigHour === true &&
+                config._a[HOUR] <= 12 &&
+                config._a[HOUR] > 0) {
+            getParsingFlags(config).bigHour = undefined;
         }
         // handle meridiem
         config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
@@ -40961,7 +40978,7 @@ define('moment', function (require, exports, module) {
             currentScore;
 
         if (config._f.length === 0) {
-            config._pf.invalidFormat = true;
+            getParsingFlags(config).invalidFormat = true;
             config._d = new Date(NaN);
             return;
         }
@@ -40972,7 +40989,6 @@ define('moment', function (require, exports, module) {
             if (config._useUTC != null) {
                 tempConfig._useUTC = config._useUTC;
             }
-            tempConfig._pf = defaultParsingFlags();
             tempConfig._f = config._f[i];
             configFromStringAndFormat(tempConfig);
 
@@ -40981,12 +40997,12 @@ define('moment', function (require, exports, module) {
             }
 
             // if there is any input that was not parsed add a penalty for that format
-            currentScore += tempConfig._pf.charsLeftOver;
+            currentScore += getParsingFlags(tempConfig).charsLeftOver;
 
             //or tokens
-            currentScore += tempConfig._pf.unusedTokens.length * 10;
+            currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
 
-            tempConfig._pf.score = currentScore;
+            getParsingFlags(tempConfig).score = currentScore;
 
             if (scoreToBeat == null || currentScore < scoreToBeat) {
                 scoreToBeat = currentScore;
@@ -41029,6 +41045,8 @@ define('moment', function (require, exports, module) {
             configFromStringAndArray(config);
         } else if (format) {
             configFromStringAndFormat(config);
+        } else if (isDate(input)) {
+            config._d = input;
         } else {
             configFromInput(config);
         }
@@ -41081,7 +41099,6 @@ define('moment', function (require, exports, module) {
         c._i = input;
         c._f = format;
         c._strict = strict;
-        c._pf = defaultParsingFlags();
 
         return createFromConfig(c);
     }
@@ -41655,11 +41672,25 @@ define('moment', function (require, exports, module) {
     }
 
     function from (time, withoutSuffix) {
+        if (!this.isValid()) {
+            return this.localeData().invalidDate();
+        }
         return create__createDuration({to: this, from: time}).locale(this.locale()).humanize(!withoutSuffix);
     }
 
     function fromNow (withoutSuffix) {
         return this.from(local__createLocal(), withoutSuffix);
+    }
+
+    function to (time, withoutSuffix) {
+        if (!this.isValid()) {
+            return this.localeData().invalidDate();
+        }
+        return create__createDuration({from: this, to: time}).locale(this.locale()).humanize(!withoutSuffix);
+    }
+
+    function toNow (withoutSuffix) {
+        return this.to(local__createLocal(), withoutSuffix);
     }
 
     function locale (key) {
@@ -41764,11 +41795,11 @@ define('moment', function (require, exports, module) {
     }
 
     function parsingFlags () {
-        return extend({}, this._pf);
+        return extend({}, getParsingFlags(this));
     }
 
     function invalidAt () {
-        return this._pf.overflow;
+        return getParsingFlags(this).overflow;
     }
 
     addFormatToken(0, ['gg', 2], 0, function () {
@@ -41919,7 +41950,7 @@ define('moment', function (require, exports, module) {
         if (weekday != null) {
             week.d = weekday;
         } else {
-            config._pf.invalidWeekday = input;
+            getParsingFlags(config).invalidWeekday = input;
         }
     });
 
@@ -42044,7 +42075,7 @@ define('moment', function (require, exports, module) {
     });
     addParseToken(['h', 'hh'], function (input, array, config) {
         array[HOUR] = toInt(input);
-        config._pf.bigHour = true;
+        getParsingFlags(config).bigHour = true;
     });
 
     // LOCALES
@@ -42161,6 +42192,8 @@ define('moment', function (require, exports, module) {
     momentPrototype__proto.format       = format;
     momentPrototype__proto.from         = from;
     momentPrototype__proto.fromNow      = fromNow;
+    momentPrototype__proto.to           = to;
+    momentPrototype__proto.toNow        = toNow;
     momentPrototype__proto.get          = getSet;
     momentPrototype__proto.invalidAt    = invalidAt;
     momentPrototype__proto.isAfter      = isAfter;
@@ -42349,7 +42382,7 @@ define('moment', function (require, exports, module) {
         }
         // Lenient ordinal parsing accepts just a number in addition to
         // number + (possibly) stuff coming from _ordinalParseLenient.
-        this._ordinalParseLenient = new RegExp(this._ordinalParse.source + '|' + /\d{1,2}/.source);
+        this._ordinalParseLenient = new RegExp(this._ordinalParse.source + '|' + (/\d{1,2}/).source);
     }
 
     var prototype__proto = Locale.prototype;
@@ -42566,13 +42599,13 @@ define('moment', function (require, exports, module) {
             // handle milliseconds separately because of floating point math errors (issue #1867)
             days = this._days + Math.round(yearsToDays(this._months / 12));
             switch (units) {
-                case 'week'   : return days / 7            + milliseconds / 6048e5;
-                case 'day'    : return days                + milliseconds / 864e5;
-                case 'hour'   : return days * 24           + milliseconds / 36e5;
-                case 'minute' : return days * 24 * 60      + milliseconds / 6e4;
-                case 'second' : return days * 24 * 60 * 60 + milliseconds / 1000;
+                case 'week'   : return days / 7     + milliseconds / 6048e5;
+                case 'day'    : return days         + milliseconds / 864e5;
+                case 'hour'   : return days * 24    + milliseconds / 36e5;
+                case 'minute' : return days * 1440  + milliseconds / 6e4;
+                case 'second' : return days * 86400 + milliseconds / 1000;
                 // Math.floor prevents floating point math errors here
-                case 'millisecond': return Math.floor(days * 24 * 60 * 60 * 1000) + milliseconds;
+                case 'millisecond': return Math.floor(days * 864e5) + milliseconds;
                 default: throw new Error('Unknown unit ' + units);
             }
         }
@@ -42773,7 +42806,7 @@ define('moment', function (require, exports, module) {
     // Side effect imports
 
 
-    utils_hooks__hooks.version = '2.10.2';
+    utils_hooks__hooks.version = '2.10.3';
 
     setHookCallback(local__createLocal);
 
@@ -42822,7 +42855,7 @@ define('jstree', function (require, exports, module) {
 }(function ($, undefined) {
 	"use strict";
 /*!
- * jsTree 3.1.0
+ * jsTree 3.1.1
  * http://jstree.com/
  *
  * Copyright (c) 2014 Ivan Bozhanov (http://vakata.com)
@@ -42880,7 +42913,7 @@ define('jstree', function (require, exports, module) {
 		 * specifies the jstree version in use
 		 * @name $.jstree.version
 		 */
-		version : '3.1.0',
+		version : '3.1.1',
 		/**
 		 * holds all the default options used when creating new instances
 		 * @name $.jstree.defaults
@@ -44741,7 +44774,7 @@ define('jstree', function (require, exports, module) {
 			if(tmp.length) {
 				data.icon = tmp.hasClass('jstree-themeicon-hidden') ? false : tmp.attr('rel');
 			}
-			if(data.state.icon) {
+			if(data.state.icon !== undefined) {
 				data.icon = data.state.icon;
 			}
 			if(data.icon === undefined || data.icon === null || data.icon === "") {
@@ -45966,7 +45999,7 @@ define('jstree', function (require, exports, module) {
 		 * sets the state of the tree. Used internally.
 		 * @name set_state(state [, callback])
 		 * @private
-		 * @param {Object} state the state to restore
+		 * @param {Object} state the state to restore. Keep in mind this object is passed by reference and jstree will modify it.
 		 * @param {Function} callback an optional function to execute once the state is restored.
 		 * @trigger set_state.jstree
 		 */
@@ -46056,6 +46089,10 @@ define('jstree', function (require, exports, module) {
 					state : { loaded : false }
 				}
 			};
+			this._data.core.selected = [];
+			this._data.core.last_clicked = null;
+			this._data.core.focused = null;
+
 			var c = this.get_container_ul()[0].className;
 			if(!skip_loading) {
 				this.element.html("<"+"ul class='"+c+"' role='group'><"+"li class='jstree-initial-node jstree-loading jstree-leaf jstree-last' role='treeitem' id='j"+this._id+"_loading'><i class='jstree-icon jstree-ocl'></i><"+"a class='jstree-anchor' href='#'><i class='jstree-icon jstree-themeicon-hidden'></i>" + this.get_string("Loading ...") + "</a></li></ul>");
@@ -47330,7 +47367,7 @@ define('jstree', function (require, exports, module) {
 							dpc = data.nodes,
 							i, j;
 						for(i = 0, j = dpc.length; i < j; i++) {
-							m[dpc[i]].state.checked = (m[dpc[i]].original && m[dpc[i]].original.state && m[dpc[i]].original.state.checked);
+							m[dpc[i]].state.checked = m[dpc[i]].state.checked || (m[dpc[i]].original && m[dpc[i]].original.state && m[dpc[i]].original.state.checked);
 							if(m[dpc[i]].state.checked) {
 								this._data.checkbox.selected.push(dpc[i]);
 							}
@@ -47981,6 +48018,12 @@ define('jstree', function (require, exports, module) {
 			}
 			return res;
 		};
+		this.refresh = function (skip_loading, forget_state) {
+			if(!this.settings.checkbox.tie_selection) {
+				this._data.checkbox.selected = [];
+			}
+			return parent.refresh.apply(this, arguments);
+		};
 	};
 
 	// include the checkbox plugin by default
@@ -48626,7 +48669,7 @@ define('jstree', function (require, exports, module) {
 		 */
 		open_timeout : 500,
 		/**
-		 * a function invoked each time a node is about to be dragged, invoked in the tree's scope and receives the nodes about to be dragged as an argument (array) - return `false` to prevent dragging
+		 * a function invoked each time a node is about to be dragged, invoked in the tree's scope and receives the nodes about to be dragged as an argument (array) and the event that started the drag - return `false` to prevent dragging
 		 * @name $.jstree.defaults.dnd.is_draggable
 		 * @plugin dnd
 		 */
@@ -48694,7 +48737,7 @@ define('jstree', function (require, exports, module) {
 						txt = $.vakata.html.escape(txt);
 					}
 					if(obj && obj.id && obj.id !== "#" && (e.which === 1 || e.type === "touchstart") &&
-						(this.settings.dnd.is_draggable === true || ($.isFunction(this.settings.dnd.is_draggable) && this.settings.dnd.is_draggable.call(this, (mlt > 1 ? this.get_top_selected(true) : [obj]))))
+						(this.settings.dnd.is_draggable === true || ($.isFunction(this.settings.dnd.is_draggable) && this.settings.dnd.is_draggable.call(this, (mlt > 1 ? this.get_top_selected(true) : [obj]), e)))
 					) {
 						this.element.trigger('mousedown.jstree');
 						return $.vakata.dnd.start(e, { 'jstree' : true, 'origin' : this, 'obj' : this.get_node(obj,true), 'nodes' : mlt > 1 ? this.get_top_selected() : [obj.id] }, '<div id="jstree-dnd" class="jstree-' + this.get_theme() + ' jstree-' + this.get_theme() + '-' + this.get_theme_variant() + ' ' + ( this.settings.core.themes.responsive ? ' jstree-dnd-responsive' : '' ) + '"><i class="jstree-icon jstree-er"></i>' + txt + '<ins class="jstree-copy" style="display:none;">+</ins></div>');

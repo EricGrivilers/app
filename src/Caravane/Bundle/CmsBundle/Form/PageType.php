@@ -17,9 +17,6 @@ class PageType extends AbstractType
         $builder
             ->add('slug')
             ->add('title')
-           // ->add('template')
-           // ->add('public')
-
             ->add('parent', 'phpcr_document', array(
                'property' => 'title',
                'class'=> 'Caravane\Bundle\CmsBundle\Document\Page',
