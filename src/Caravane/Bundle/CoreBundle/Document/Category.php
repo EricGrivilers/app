@@ -1,16 +1,16 @@
 <?php
-namespace Caravane\Bundle\CmsBundle\Document;
+namespace Caravane\Bundle\CoreBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\Common\Collections\ArrayCollection;
 use Cocur\Slugify\Slugify;
 
-use Caravane\Bundle\CoreBundle\Document\Category;
+
 
 /**
 * @PHPCR\Document(referenceable=true)
 */
-class Page
+class Category
 {
     /**
     * @PHPCR\Id()
@@ -43,11 +43,6 @@ class Page
     private $active = false;
 
 
-    /**
-     * @PHPCR\ReferenceMany(targetDocument="Caravane\Bundle\CoreBundle\Document\Category", cascade="persist", strategy="hard")
-     */
-    private $categories;
-
 
     /**
      * @PHPCR\ParentDocument()
@@ -61,10 +56,6 @@ class Page
         $this->id = $id;
     }
 
-    public function __construct()
-    {
-        $this->categories = new ArrayCollection();
-    }
 
     public function getId()
     {

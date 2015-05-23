@@ -3,9 +3,13 @@ namespace Caravane\Bundle\ShopBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\Common\Collections\ArrayCollection;
-use Caravane\Bundle\ShopBundle\Document\Category;
+
+use Caravane\Bundle\CoreBundle\Document\Category;
 use Caravane\Bundle\ShopBundle\Document\Manufacturer;
 
+/**
+ * @PHPCR\Document(referenceable=true)
+ */
 class Product
 {
     /**
@@ -46,7 +50,7 @@ class Product
 
 
     /**
-     * @PHPCR\ReferenceMany(targetDocument="Category", cascade="persist", strategy="hard")
+     * @PHPCR\ReferenceMany(targetDocument="Caravane\Bundle\CoreBundle\Document\Category", cascade="persist", strategy="hard")
      */
     private $categories;
 

@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for product in products %}
             <tr>
                 <td><a href="{{ path('admin_shop_product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>

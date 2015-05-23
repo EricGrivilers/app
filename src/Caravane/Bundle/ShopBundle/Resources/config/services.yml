@@ -1,10 +1,8 @@
 services:
-    caravane_shop.phpcr.initializer:
-        class: Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer
-        arguments: [ 'Shop', ['/','/shop', '/shop/product','/shop/manufacturer','/shop/category'] ]
-        tags:
-            - { name: "doctrine_phpcr.initializer" }
-
+    caravane_shop.phpcr.initializer.shop:
+         class: Caravane\Bundle\ShopBundle\Initializer\ShopInitializer
+         tags:
+             - { name: doctrine_phpcr.initializer, priority: 60 }
     caravane_shop.product_manager:
         class: Caravane\ShopBundle\Manager\ProductManager
         arguments: [@doctrine.orm.entity_manager]

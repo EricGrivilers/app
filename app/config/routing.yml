@@ -1,3 +1,7 @@
+caravane_core:
+    resource: "@CaravaneCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 caravane_crm:
     resource: "@CaravaneCrmBundle/Resources/config/routing.yml"
     prefix:   /

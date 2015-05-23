@@ -1,17 +1,17 @@
 <?php
 
-namespace Caravane\Bundle\CmsBundle\Initializer;
+namespace Caravane\Bundle\ShopBundle\Initializer;
 
 use Doctrine\Bundle\PHPCRBundle\Initializer\InitializerInterface;
 use PHPCR\Util\NodeHelper;
 use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
-use Caravane\Bundle\CmsBundle\Document\Site;
+use Caravane\Bundle\ShopBundle\Document\Shop;
 
-class SiteInitializer implements InitializerInterface
+class ShopInitializer implements InitializerInterface
 {
     private $basePath;
 
-    public function __construct($basePath = '/cms') {
+    public function __construct($basePath = '/shop') {
         $this->basePath = $basePath;
     }
 
@@ -22,17 +22,16 @@ class SiteInitializer implements InitializerInterface
             return;
         }
 
-        $site = new Site();
-        $site->setId($this->basePath);
-        $dm->persist($site);
+        $shop = new Shop();
+        $shop->setId($this->basePath);
+        $dm->persist($shop);
         $dm->flush();
 
         $session = $registry->getConnection();
 
         // create the 'cms', 'pages', and 'posts' nodes
-        NodeHelper::createPath($session, $this->basePath . '/pages');
-        NodeHelper::createPath($session, $this->basePath . '/posts');
-        NodeHelper::createPath($session, $this->basePath . '/routes');
+        NodeHelper::createPath($session, $this->basePath . '/products');
+        NodeHelper::createPath($session, $this->basePath . '/manufacturers');
         NodeHelper::createPath($session, $this->basePath . '/categories');
 
         $session->save();
@@ -40,6 +39,6 @@ class SiteInitializer implements InitializerInterface
 
     public function getName()
     {
-        return 'caravane_cms_site_initializer';
+        return 'caravane_shop_shop_initializer';
     }
 }

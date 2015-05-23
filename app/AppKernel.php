@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Caravane\Bundle\UserBundle\CaravaneUserBundle(),
             new Caravane\Bundle\SalesBundle\CaravaneSalesBundle(),
             new Caravane\Bundle\CrmBundle\CaravaneCrmBundle(),
+            new Caravane\Bundle\CoreBundle\CaravaneCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
