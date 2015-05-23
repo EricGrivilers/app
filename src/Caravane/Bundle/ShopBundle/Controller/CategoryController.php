@@ -46,7 +46,7 @@ class CategoryController extends Controller
             $rootCategory = $dm->find(null, '/shop/category');
             $category->setParent($rootCategory);
         }
-       
+
         if(!$category->getDescription()) {
             $category->setDescription($category->getName());
         }
