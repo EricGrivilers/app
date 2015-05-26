@@ -16,10 +16,9 @@ body {
   width: 95%;
 }
 #sidebar li {
-  border:0 #f2f2f2 solid;
-  border-bottom-width:1px;
+  border: 0 #f2f2f2 solid;
+  border-bottom-width: 1px;
 }
-
 /* collapsed sidebar styles */
 @media screen and (max-width: 767px) {
   .row-offcanvas {
@@ -28,13 +27,10 @@ body {
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
-  .row-offcanvas-right
-  .sidebar-offcanvas {
+  .row-offcanvas-right .sidebar-offcanvas {
     right: -41.6%;
   }
-
-  .row-offcanvas-left
-  .sidebar-offcanvas {
+  .row-offcanvas-left .sidebar-offcanvas {
     left: -41.6%;
   }
   .row-offcanvas-right.active {
@@ -49,6 +45,6 @@ body {
     width: 41.6%;
   }
   #sidebar {
-    padding-top:0;
+    padding-top: 0;
   }
 }

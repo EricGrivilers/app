@@ -50,7 +50,7 @@ class PageController extends Controller
             $dm->persist($page);
             $dm->flush();
 
-            return $this->redirect($this->generateUrl('admin_cms_page_show', array('name' => $page->getName())));
+            return $this->redirect($this->generateUrl('caravane_admin_cms_page_show', array('name' => $page->getName())));
         }
 
         return $this->render('CaravaneCmsBundle:Page:new.html.twig', array(
@@ -69,7 +69,7 @@ class PageController extends Controller
     private function createCreateForm(Page $entity)
     {
         $form = $this->createForm(new PageType(), $entity, array(
-            'action' => $this->generateUrl('admin_cms_page_create'),
+            'action' => $this->generateUrl('caravane_admin_cms_page_create'),
             'method' => 'POST',
         ));
 
@@ -149,7 +149,7 @@ class PageController extends Controller
     private function createEditForm(Page $entity)
     {
         $form = $this->createForm(new PageType(), $entity, array(
-            'action' => $this->generateUrl('admin_cms_page_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('caravane_admin_cms_page_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -178,7 +178,7 @@ class PageController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_cms_page_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('caravane_admin_cms_page_edit', array('id' => $id)));
         }
 
         return $this->render('CaravaneCmsBundle:Page:edit.html.twig', array(
@@ -208,7 +208,7 @@ class PageController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_cms_page'));
+        return $this->redirect($this->generateUrl('caravane_admin_cms_page'));
     }
 
     /**
@@ -221,7 +221,7 @@ class PageController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_cms_page_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('caravane_admin_cms_page_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
