@@ -1,14 +1,13 @@
 <?php
-namespace Caravane\Bunlde\ShopBundle\Document;
+
+namespace Caravane\Bundle\ShopBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-use Caravane\Bundle\CmsBundle\Document\Page;
 
 /**
  * @PHPCR\Document()
  */
-class Shop
-{
+class Shop {
     /**
      * @PHPCR\Id()
      */
@@ -19,18 +18,15 @@ class Shop
      */
     protected $homepage;
 
-    public function getHomepage()
-    {
+    public function getHomepage() {
         return $this->homepage;
     }
 
-    public function setHomepage($homepage)
-    {
+    public function setHomepage($homepage) {
         $this->homepage = $homepage;
     }
 
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 }

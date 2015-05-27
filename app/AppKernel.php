@@ -32,12 +32,14 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new Symfony\Cmf\Bundle\RoutingAutoBundle\CmfRoutingAutoBundle(),
 
+
             new AppBundle\AppBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
             new Caravane\Bundle\ShopBundle\CaravaneShopBundle(),
             new Caravane\Bundle\UserBundle\CaravaneUserBundle(),
             new Caravane\Bundle\SalesBundle\CaravaneSalesBundle(),
             new Caravane\Bundle\CrmBundle\CaravaneCrmBundle(),
+            new Caravane\Bundle\CoreBundle\CaravaneCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

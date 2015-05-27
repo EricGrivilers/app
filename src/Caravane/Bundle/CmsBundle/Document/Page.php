@@ -5,7 +5,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\Common\Collections\ArrayCollection;
 use Cocur\Slugify\Slugify;
 
-use Caravane\Bundle\CmsBundle\Document\Category;
+use Caravane\Bundle\CoreBundle\Document\Category;
 
 /**
 * @PHPCR\Document(referenceable=true)
@@ -44,7 +44,7 @@ class Page
 
 
     /**
-     * @PHPCR\ReferenceMany(targetDocument="Category", cascade="persist", strategy="hard")
+     * @PHPCR\ReferenceMany(targetDocument="Caravane\Bundle\CoreBundle\Document\Category", cascade="persist", strategy="hard")
      */
     private $categories;
 
@@ -70,6 +70,7 @@ class Page
     {
         return $this->id;
     }
+
     public function getChildren()
     {
         return $this->children;

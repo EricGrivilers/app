@@ -1,9 +1,9 @@
 {% extends '::admin.html.twig' %}
 
 {% block body -%}
-    <h1>Page list</h1>
+    <h1>Pages</h1>
 
-    <table class="records_list">
+    <table class="records_list table table-condensed table-striped table-bordered ">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,25 +31,20 @@
 
 
                 <td>
-                <ul>
-                    <li>
-                        <a href="">show</a>
-                    </li>
-                    <li>
-                        <a href="">edit</a>
-                    </li>
-                </ul>
+
+                        <a href="" class="fa fa-eye"></a>
+
+
+                        <a href="" class="fa fa-edit"></a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('admin_cms_page_new') }}">
-                Create a new entry
+        <a class="btn btn-primary" href="{{ path('caravane_admin_cms_page_new') }}">
+                New page
             </a>
-        </li>
-    </ul>
+
     {% endblock %}
