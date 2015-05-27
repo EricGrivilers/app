@@ -3,6 +3,6 @@ services:
          class: Caravane\Bundle\ShopBundle\Initializer\ShopInitializer
          tags:
              - { name: doctrine_phpcr.initializer, priority: 60 }
-    caravane_shop.product_manager:
-        class: Caravane\ShopBundle\Manager\ProductManager
-        arguments: [@doctrine.orm.entity_manager]
+    #caravane_shop.product_manager:
+    #    class: Caravane\ShopBundle\Manager\ProductManager
+    #    arguments: [@doctrine.orm.entity_manager]

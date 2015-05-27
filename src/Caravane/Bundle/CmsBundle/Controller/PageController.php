@@ -41,7 +41,7 @@ class PageController extends Controller
         $form = $this->createCreateForm($page);
         $form->handleRequest($request);
 
-        $rootPage = $dm->find(null, '/cms/page');
+        //$rootPage = $dm->find(null, '/cms/page');
         //$page->setParent($rootPage);
         $page->setName($page->getTitle());
         $page->setSlug($page->getTitle());
@@ -50,7 +50,7 @@ class PageController extends Controller
             $dm->persist($page);
             $dm->flush();
 
-            return $this->redirect($this->generateUrl('caravane_admin_cms_page_show', array('name' => $page->getName())));
+            return $this->redirect($this->generateUrl('caravane_admin_cms_page'));
         }
 
         return $this->render('CaravaneCmsBundle:Page:new.html.twig', array(
@@ -58,6 +58,7 @@ class PageController extends Controller
             'form'   => $form->createView(),
         ));
     }
+
 
     /**
      * Creates a form to create a Page entity.
@@ -79,7 +80,7 @@ class PageController extends Controller
     }
 
     /**
-     * Displays a form to create a new Page entity.
+     * Displays a form to create a new Page.
      *
      */
     public function newAction()
