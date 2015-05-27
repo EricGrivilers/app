@@ -2,25 +2,25 @@
 
 namespace Caravane\Bundle\ShopBundle\Manager;
 
-use Doctrine\ORM\EntityManager;
-use Caravane\ShopBundle\Entity\Product;
-use Caravane\ShopBundle\Entity\Category;
+use Doctrine\ODM\PHPCR\DocumentManager;
+use Caravane\Bundle\ShopBundle\Document\Product;
+use Caravane\Bundle\CoreBundle\Document\Category;
 
 class ProductManager {
 
-    protected $em;
-    public function __construct(EntityManager $em)
+    protected $dm;
+    public function __construct(DocumentManager $dm)
     {
-        $this->em = $em;
+        $this->$dm = $dm;
     }
 
 
 
     public function import($products) {
         //var_dump($products);
-        $em=$this->em;
+        $dm=$this->dm;
         $rootCategories=array();
-        $categories=$em->getRepository('CaravaneShopBundle:Category')->findBy(array('lvl'=>0));
+        $categories=$dm->getRepository('CaravaneShopBundle:Category')->findBy(array('lvl'=>0));
         foreach($categories as $category) {
             $rootCategories[$category->getName()]=$category;
         }
@@ -39,7 +39,7 @@ class ProductManager {
                     $category->setActive(true);
                     $category->setInsertDate(new \Datetime('now'));
                     $category->setUpdateDate(new \Datetime('now'));
-                    $em->persist($category);
+                    $dm->persist($category);
                 }
             }
 

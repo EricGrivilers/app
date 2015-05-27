@@ -97,4 +97,19 @@ class ProductController extends Controller
         ));
     }
 
+
+
+
+    /**
+     * Import a new Product.
+     *
+     */
+    public function importAction(Request $request)
+    {
+        $productManager=$this->get('caravane_shop.product_manager');
+        $productManager->import();
+        die();
+
+    }
+
 }
