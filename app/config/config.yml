@@ -227,6 +227,9 @@ cmf_routing:
                 route_basepath: /cms/routes
         controllers_by_class:
                 Caravane\Bundle\CmsBundle\Document\Page: Caravane\Bundle\CmsBundle\Controller\DefaultController::pageAction
+    #mappings:
+    #    Caravane\Bundle\ShopBundle\Document\Category:
+    #        content_path
 
 cmf_routing_auto:
     persistence:
