@@ -1,0 +1,9 @@
+{% extends 'knp_menu.html.twig' %}
+
+
+
+{% block linkElement %}<a href="{{ item.uri }}"{{ _self.attributes(item.linkAttributes) }}>a{{ block('label') }}</a>{% endblock %}
+
+{% block spanElement %}<a href="{{ item.label }}">{{ block('label') }}</a>{% endblock %}
+
+{% block label %}c{% if options.allow_safe_labels and item.getExtra('safe_label', false) %}d{{ item.label|raw }}{% else %}e{{ item.label }}{% endif %}{% endblock %}

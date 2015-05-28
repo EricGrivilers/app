@@ -15,24 +15,18 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('title')
             ->add('sku')
             ->add('reference')
-            ->add('provider')
+            //->add('provider')
             ->add('price')
             ->add('attributes')
             ->add('description')
             ->add('meta_description')
             ->add('meta_keywords')
-            ->add('insertDate')
-            ->add('updateDate')
             ->add('active')
             ->add('stock')
-            ->add('year')
-            ->add('color')
-            ->add('appellation')
-            ->add('region')
-            ->add('typicite')
+
         ;
     }
     
@@ -42,7 +36,7 @@ class ProductType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Caravane\ShopBundle\Entity\Product'
+            'data_class' => 'Caravane\Bundle\ShopBundle\Document\Product'
         ));
     }
 
@@ -51,6 +45,6 @@ class ProductType extends AbstractType
      */
     public function getName()
     {
-        return 'caravane_shopbundle_product';
+        return 'caravane_shop_product_type';
     }
 }

@@ -4,6 +4,9 @@ namespace Caravane\Bundle\ShopBundle\Document;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Caravane\Bundle\ShopBundle\Document\Category;
 
+/**
+ * @PHPCR\Document(referenceable=true)
+ */
 class Manufacturer
 {
 

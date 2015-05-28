@@ -3,6 +3,8 @@ namespace Caravane\Bundle\CoreBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
+use Knp\Menu\NodeInterface;
 use Cocur\Slugify\Slugify;
 
 
@@ -10,7 +12,7 @@ use Cocur\Slugify\Slugify;
 /**
 * @PHPCR\Document(referenceable=true)
 */
-class Category
+class Category implements RouteReferrersReadInterface, NodeInterface
 {
     /**
     * @PHPCR\Id()
@@ -43,6 +45,10 @@ class Category
     private $active = false;
 
 
+    /**
+     * @PHPCR\Children()
+     */
+    protected $children;
 
     /**
      * @PHPCR\ParentDocument()
@@ -110,4 +116,25 @@ class Category
         }
         $this->slug = $slug;
     }
+
+    public function getRoutes() {
+        return $this->routes;
+    }
+
+    public function getOptions()
+    {
+        return array(
+            'label' => $this->title,
+            'content' => $this,
+
+            'attributes'         => array(),
+            'childrenAttributes' => array(),
+            'displayChildren'    => true,
+            'linkAttributes'     => array("href"=>"bbb"),
+            'labelAttributes'    => array("href"=>"ccc"),
+        );
+    }
+
+
+
 }
