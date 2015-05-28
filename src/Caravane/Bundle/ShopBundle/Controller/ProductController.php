@@ -106,9 +106,24 @@ class ProductController extends Controller
      */
     public function importAction(Request $request)
     {
-        $productManager=$this->get('caravane_shop.product_manager');
-        $productManager->import();
-        die();
+        $form = $this->createFormBuilder(array())
+            ->add('source', 'file')
+            ->getForm();
+        $form->add('submit', 'submit', array('label' => 'Import'));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $name = "tmp.xml";
+            $dir = __DIR__."/../../../../../web/tmp";
+            $form['source']->getData()->move($dir, $name);
+            $xml = simplexml_load_file($dir."/".$name);
+            $productManager=$this->get("caravane_shop.product_manager");
+            $productManager->import($xml);
+        }
+
+        return $this->render('CaravaneShopBundle:Product:import.html.twig', array(
+            'import_form'=>$form->createView()
+        ));
 
     }
 
