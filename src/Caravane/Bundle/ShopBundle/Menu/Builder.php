@@ -7,6 +7,10 @@ namespace Caravane\Bundle\ShopBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
+use PHPCR\Util\NodeHelper;
+
 class Builder extends ContainerAware
 {
     public function categoriesMenu(FactoryInterface $factory, array $options)

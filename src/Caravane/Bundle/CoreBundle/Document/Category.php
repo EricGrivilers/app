@@ -3,6 +3,7 @@ namespace Caravane\Bundle\CoreBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Knp\Menu\NodeInterface;
 use Cocur\Slugify\Slugify;
@@ -55,6 +56,17 @@ class Category implements RouteReferrersReadInterface, NodeInterface
      */
     protected $parent;
 
+    /**
+     * @var RouteObjectInterface[]
+     */
+    protected $routes;
+
+
+    public function __construct()
+    {
+        $this->routes = new ArrayCollection();
+        $this->menuNodes = new ArrayCollection();
+    }
 
 
     public function setId($id)

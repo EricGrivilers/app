@@ -206,35 +206,18 @@ oneup_uploader:
         gallery:
             frontend: dropzone # or any uploader you use in the frontend
 
-stof_doctrine_extensions:
-    default_locale: en_US
-    orm:
-        default:
-            tree: true
-            sluggable: true
-            translatable: true
-            timestampable: true
+cmf_core:
+    persistence:
+        phpcr: true
+        # if you want another basepath
+        # basepath: /custom/basepath
+    publish_workflow: false
 
 cmf_routing:
-    chain:
-        routers_by_id:
-            cmf_routing.dynamic_router: 20
-            router.default: 100
     dynamic:
-        enabled: true
-        persistence:
-            phpcr:
-                route_basepath: /cms/routes
-        controllers_by_class:
-                Caravane\Bundle\CmsBundle\Document\Page: Caravane\Bundle\CmsBundle\Controller\DefaultController::pageAction
-    #mappings:
-    #    Caravane\Bundle\ShopBundle\Document\Category:
-    #        content_path
+        templates_by_class:
+            Caravane\Bundle\CmsBundle\Doument\Page: CaravaneCmsBundle:Page:index.html.twig
 
-cmf_routing_auto:
-    persistence:
-        phpcr:
-            enabled: true
 
 
 knp_menu:

@@ -8,13 +8,13 @@ services:
         arguments: [@doctrine_phpcr.odm.default_document_manager]
 
 
-    caravane_shop.category_menu_provider:
-            class: Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider
-            arguments:
-                - '@cmf_menu.factory'
-                - '@doctrine_phpcr'
-                - /shop/categories
-            calls:
-                - [setRequest, ["@?request="]]
-            tags:
-                - { name: knp_menu.provider }
+    #caravane_shop.category_menu_provider:
+    #        class: Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider
+    #        arguments:
+    #            - '@cmf_menu.factory'
+    #            - '@doctrine_phpcr'
+    #            - /shop/categories
+    #        calls:
+    #            - [setRequest, ["@?request="]]
+    #        tags:
+    #            - { name: knp_menu.provider }
